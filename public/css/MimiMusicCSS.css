@@ -1,0 +1,332 @@
+html, body, .containerPanel, .loginPanel, .imagePanel
+{
+	height: 100%;
+	font-family: "Helvetica",Arial,sans-serif;
+}
+
+/*Botones Genéricos*/
+.btn
+{
+	background-color: #78c9af;
+	font-family: "Helvetica",Arial,sans-serif;
+	font-weight: bold;
+	color: rgb(80, 82, 80);
+}
+
+.form-control
+{
+	background-color: rgb(209, 244, 233);
+}
+
+/*Login Panel*/
+.rowLoginPanel
+{
+	height: 95%;
+
+}
+
+.loginPanel
+{
+	background-color: #505250;
+	padding: 4% 5%;
+}
+
+	/*logo*/
+	.logoRow
+	{
+		width: 100%;
+		margin: auto auto;
+		height: 25vh;
+	}
+
+	/*Para compus*/
+	@media screen and (min-width: 768px)
+	{
+		.logoRow
+		{
+			width:100%;
+			height:11.5vw;
+			margin: 0px;
+		}
+	}
+
+	.logo
+	{
+		background: url("../images/logo.png") no-repeat ; 
+		width: 80%;
+		height:100%;
+		background-size: 100%;
+		padding: 0px;
+		margin: auto auto;
+	}
+
+	@media screen and (min-width: 768px)
+	{
+		.logo{
+			background-size: 100%;
+			width:100%;
+		}
+	}
+
+
+	/* Form Login */
+
+	.headerText
+	{
+		font-size: 5vmax;
+		color: rgb(118, 204, 177);
+		margin: 0.2vh 0%;
+	}
+
+
+	@media screen and (min-width: 768px)
+	{
+		.headerText
+		{
+			font-size: 5vmin;
+			margin: 1.5vh 0%;
+		}
+	}
+
+
+	@media screen and (max-width: 767px)
+	{
+		.formLogIn .form-group{
+			margin: 3vh 0%;
+		}
+	}
+
+	.formLogIn .form-group label
+	{
+		font-weight: normal;
+		color: rgb(118, 204, 177);
+	}
+
+	@media screen and (min-width: 768px)
+	{
+		.formLogIn .form-group label
+		{
+			font-size: 2.5vmin;
+		}
+	}
+
+	.loginPanel p
+	{
+		margin: 2vh 0;
+		color: #d3ece4;
+		font-size: 5vmin;
+		cursor: pointer;
+	}
+
+	@media screen and (min-width: 768px)
+	{
+		.loginPanel p
+		{
+			font-size: 3vmin;
+			margin: 3% 0;
+		}	
+	}
+
+	.btnLogin
+	{
+		font-size: 4vmax;
+		margin: 1vh 0%;
+	}
+
+	@media screen and (min-width: 768px)
+	{
+		.btnLogin
+		{
+			font-size: 5vmin;
+			margin: 1vh 0%;
+		}
+	}
+
+/*End Login Panel*/
+
+.footer
+{
+	height: 5%;
+	background-color: rgb(188, 193, 192);
+}
+
+.footer > div
+{
+	padding: 5px;
+}
+
+.footer > div > p
+{
+	margin: 0;
+}
+
+.imagePanel
+{
+background: url("../images/backgroundImage1.png") no-repeat center center fixed; 
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
+}
+
+.musicPanel
+{
+	margin: auto;
+	margin-top: 30px;
+	background-color: rgba(80, 82, 80, .25);
+	height: 90%;
+	width: 95%;
+	overflow: auto;
+}
+
+
+/* INDEX */
+
+body
+{
+	background-color: rgb(209, 244, 233);
+}
+
+.navbar-inverse
+{
+	background-color: rgb(80, 82, 80);
+	border-bottom-color: rgb(65, 67, 65);
+	border-bottom: 1px solid;
+}
+
+
+.headerLogo
+{
+	height: 50px;
+}
+
+.navbar-header, .headerLogo a, .logoNav{
+	height: 100%;
+}
+
+/*Logo NavBar*/
+
+.logoNav
+{
+	display:none;
+	height: 100%;
+	width: 100%;
+}
+
+.logoNavSM
+{
+	height: 100%;
+	width: 100%;
+}
+
+@media screen and (min-width: 768px)
+{
+	.logoNav
+	{
+		display: inline-block;	
+	}
+
+	.logoNavSM
+	{
+		display: none;
+	}
+}
+	
+.navbar-right .dropdown-header
+{
+	margin: 2vh 0vh 0vh;
+}
+
+
+.contenido
+{
+	margin-top: 70px;
+}
+
+.nav-pills>li>a
+{
+	border: 1.5px groove rgb(80, 82, 80);
+	border-radius: 7px;
+}
+
+.nav-pills>li.active>a
+{
+	background-color: rgb(80, 82, 80);
+}
+
+.nav-pills>li+li
+{
+	margin-left: 0px;
+}
+
+.rowPills
+{
+	margin-bottom: 16px;
+}
+
+.rowPillsXS .btn-group
+{
+	width: 100%;
+	margin-bottom: 2vh;
+	padding: 0% 2vw;
+}
+
+.rowPillsXS .btn
+{
+	background-color: rgba(118, 204, 177, .75);
+}
+
+.rowPillsXS .btn-group .active
+{
+	background-color: rgb(80, 82, 80);
+}
+
+.rowContent
+{
+	margin: 0px 0px;
+}
+
+.dropdown-menu {
+    width: 30vw;
+    background-color: rgb(80, 82, 80);
+    border: 5px inset rgb(249, 243, 242);
+}
+
+.dropdown-menu input
+{
+	width: 90%;
+	margin: 0px auto;
+}
+
+.dropdown-menu .dropdown-header
+{
+	color: #78c9af;
+}
+
+
+.dropdown-menu .btn
+{
+	background-color: #78c9af;
+	color: rgb(80, 82, 80);
+	margin: 4vw;
+}
+
+@media screen and (min-width: 768px)
+{
+	.dropdown-menu .btn
+	{
+		margin: 2vw 1.5vw;
+	}
+}
+
+.searchForm
+{
+	margin-left: 2.5vw; 
+	width: 37vw !important;
+}
+
+.col-sm-2, .col-sm-6, .col-sm-3
+{
+	padding: 0px;
+	margin: 0px;
+}
