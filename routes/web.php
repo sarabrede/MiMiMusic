@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('landingPage');
 });
+
+Route::get('/index', function () {
+    return view('index');
+});
