@@ -6,15 +6,29 @@
 	<div> </div>
 @endsection
 
-{{-- Get the songs --}}
 @php
 	$songs = DB::table('Cancion')
 	->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
 	->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
 	->select('Cancion.*', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Usuario.nombreUsuario')
 	->orderby('fechaPublicacion', 'desc')
-	->limit(6)
+	->limit(9)
 	->get();
+	/*$songs = DB::table('Cancion')
+	->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
+	->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
+	->select('Cancion.*', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Usuario.nombreUsuario')
+	->where('Usuario.idUsuario', '1')
+	->orderby('fechaPublicacion', 'desc')
+	->limit(9)
+	->get();*/
+	/*$songs = DB::table('Cancion')
+	->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
+	->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
+	->select('Cancion.*', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Usuario.nombreUsuario')
+	->orderby('visitas', 'desc')
+	->limit(9)
+	->get();*/
 @endphp
 
 @section('content')
@@ -53,37 +67,10 @@
 							  </div>
 							</form>
 
-							{{-- Display the songs --}}
 							@foreach ($songs as $song)
-								@component('amazingaudioplayer', ['id' => $song->idCancion, 'title' => $song->tituloCancion, 'author' => $song->nombreUsuario.' - ', 'album' => $song->tituloAlbum, 'description' => $song->descripcion, 'source' => 'http://66.90.93.122/anime_ost/shigatsu-wa-kimi-no-uso-ed-single-kirameki/lkfmuhddrz/01%20-%20Kirameki.mp3', 'image' => $song->fotoAlbum])
+								@component('amazingaudioplayer', ['id' => $song->idCancion, 'title' => $song->tituloCancion, 'author' => $song->nombreUsuario.' - ', 'album' => $song->tituloAlbum, 'description' => $song->descripcion, 'source' => $song->rutaCancion, 'image' => $song->fotoAlbum])
 								@endcomponent
 							@endforeach
-							
-							{{--<audio id="sound1" preload="auto" src="http://www.jezra.net/audio/skye_boat_song.ogg" autoplay controls></audio>  --}}
-
-							<audio id="sound1" preload="auto" src="http://66.90.93.122/anime_ost/shigatsu-wa-kimi-no-uso-ed-single-kirameki/lkfmuhddrz/01%20-%20Kirameki.mp3" controls></audio>
-							
-							{{-- <audio id="sound1" preload="auto" src="{{ asset('audios/Its_Not_Like_I_Like_You.mp3') }}" autoplay controls></audio>--}}
-
-							<audio controls preload="auto">
-							  <source src="{{ asset('audios/Its_Not_Like_I_Like_You.mp3') }}" type="audio/mpeg">
-							</audio>
-
-							<audio controls preload="auto">
-							  <source src="http://127.0.0.1:8080/Everybodys_Circulation_(Mashup).mp3" type="audio/mpeg">
-							</audio>
-
-
-						{{--	<script>
-								$( document ).ready(function() {
-
-    								audio = document.getElementById("sound10");
-								    audio.src = "audios/Its_Not_Like_I_Like_You.mp3";
-								    audio.load();
-								    audio.play();
-								});	
-							</script> --}}
-
 						</div>
 					</div>
 				</div>
@@ -98,4 +85,5 @@
 			</div>
 		</div>
 @endsection
+
 
