@@ -1,4 +1,15 @@
-html, body, .containerPanel, .loginPanel, .imagePanel
+/*Colors:
+Gray: #BCC1C0;
+White: #F9F3F2;
+Black: #505250;
+DarkBlue: #76CCB1;
+LightBlue: #D1F4E9;
+*/
+
+
+
+html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body, 
+.searchRow, .SearchPills, .nav-tabs, .SearchPanel, .infoResult
 {
 	height: 100%;
 	font-family: "Helvetica",Arial,sans-serif;
@@ -174,7 +185,7 @@ background: url("../images/backgroundImage1.png") no-repeat center center fixed;
 	margin: auto;
 	margin-top: 30px;
 	background-color: rgba(80, 82, 80, .25);
-	height: 90%;
+	height: 85%;
 	width: 95%;
 	overflow: auto;
 }
@@ -329,4 +340,108 @@ body
 {
 	padding: 0px;
 	margin: 0px;
+}
+
+/*Search Page*/
+
+.btnFilter
+{
+	background-color: #F9F3F2;
+	border: solid 1px transparent;
+	border-radius: 5px;
+	border-color: #969696;
+}
+
+.SearchPanel
+{
+	overflow-y: auto;
+}
+
+
+.nav-stacked > li
+{
+	height: 30%;
+	margin: 10px 2px;
+}
+
+.nav-stacked > li > a
+{
+	min-height:100%;
+	background-size: cover;
+	opacity: 0.4;
+	margin-left: 25px;
+	font-size: 40px;
+	color: white;
+	font-weight: bold;
+	text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+	padding: 17% 27% 0px;
+}
+
+
+.songsSearch
+{
+	background: url("../images/song.jpg") 50% 50% no-repeat; 
+}
+
+.albumSearch
+{
+	background: url("../images/vinil.jpg") 50% 50% no-repeat; 
+}
+
+.userSearch
+{
+	background: url("../images/users.jpg") 50% 50% no-repeat; 
+}
+
+
+.SearchPills .activePill
+{
+	opacity: 0.7;
+	margin-right: 25px;
+	margin-left: 0px;
+}
+
+.imageFrame
+{
+	padding: 0px;
+	margin: 0px 10px;
+	height: 100%;
+}
+
+.SearchResult
+{
+	height: 40%;
+	margin: 10px 40px;
+	background-color: rgba(249, 243, 242, 0.3);
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.infoResult
+{
+	padding: 0px;
+	margin: 5% 3%;
+}
+
+.infoResult > a
+{
+	cursor: pointer;
+}
+
+.infoResult > a, .infoResult > p
+{
+	color: #505250;
+	font-size: 14px;
+}
+
+.infoResult > a:first-child, .infoResult > p:first-child
+{
+	font-weight: bold;
+	font-size: 20px;
+	color: #1475AD;
+}
+
+.infoResult > p:first-child
+{
+	margin-top: 20px;
 }
