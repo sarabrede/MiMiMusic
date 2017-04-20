@@ -17,7 +17,9 @@
 		<link href="{{ asset('audioplayerengine/initaudioplayer.css') }}" rel="stylesheet" type="text/css" >
 		<script type="text/javascript" src="{{ asset('audioplayerengine/initaudioplayer.js') }}"></script>
 
-		
+		<style>
+		@yield('style')
+		</style>
 
 	</head>
 
@@ -105,15 +107,6 @@
 
 		@yield('content')
 
-		@section('footer')
-			<div class="container-fluid">
-				<div class="row footer hidden-xs visible-sm visible-md visible-lg">
-					<div class="col-md-12">
-						<p class="text-center"> <small> <span class="glyphicon glyphicon-copyright-mark"></span>2017 MiMiMusic - All right reserved</small></p>
-					</div>
-				</div>
-			</div>
-		@show
 
 			<script type="text/javascript" src="{{ asset('audioplayerengine/jquery.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('audioplayerengine/amazingaudioplayer.js') }}"></script>
