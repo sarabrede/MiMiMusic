@@ -38,7 +38,8 @@
 					      		<button type="button" class="navbar-toggle btn">
 					        	<span class="glyphicon glyphicon-search"></span>
 					      		</button>
-		      				<a class="navbar-left col-xs-3 col-sm-12" href="#"><img src="images/logo.png" class="img-responsive logoNav">
+		      				<a class="navbar-left col-xs-3 col-sm-12" href="#">
+		      				<img src="{{ asset('images/logo.png') }}" class="img-responsive logoNav">
 		      				<img src="images/minilogo.png" class="img-responsive logoNavSM"></a>
 		    			</div>
 	    			</div>
@@ -48,7 +49,7 @@
 					       		<li> 
 							       	<form class="navbar-form navbar-left">
 					  					<div class="input-group searchForm">
-					    					<input type="text" class="form-control" placeholder="Search...">
+					    					<input type="text" class="form-control" placeholder="Search..." value="@section('searchParam')@show">
 											<div class="input-group-btn">
 					  							<button class="btn btn-default" type="submit">
 					    							<i class="glyphicon glyphicon-search"></i>
