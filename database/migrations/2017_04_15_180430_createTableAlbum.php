@@ -15,12 +15,12 @@ class CreateTableAlbum extends Migration
     {
         Schema::create('Album', function (Blueprint $table) {
             $table->increments('idAlbum');
-            $table->string('fotoAlbum')->default('audios/AlbumImages/default.jpg');
+            $table->string('fotoAlbum')->default('../audioImages/default.jpg');
             $table->date('añoAlbum');
             $table->string('tituloAlbum', 50);
             $table->integer('idUsuario')->unsigned();
             $table->boolean('activo')->default(1);
-
+            $table->float('precio')->default(0.0);
             $table->foreign('idUsuario')->references('idUsuario')->on('Usuario');
         });
     }
@@ -35,3 +35,4 @@ class CreateTableAlbum extends Migration
         Schema::dropIfExists('Album');
     }
 }
+
