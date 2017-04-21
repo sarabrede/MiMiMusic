@@ -9,7 +9,7 @@ LightBlue: #D1F4E9;
 
 
 html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body, 
-.searchRow, .SearchPills, .nav-tabs, .SearchPanel, .infoResult
+.searchRow, .SearchPills, .nav-tabs, .SearchPanel, .infoResult, .ShopPanel, .ShopRow, .Profile
 {
 	height: 100%;
 	font-family: "Helvetica",Arial,sans-serif;
@@ -444,4 +444,101 @@ body
 .infoResult > p:first-child
 {
 	margin-top: 20px;
+}
+
+/* Shopping Cart */
+
+.ShopRow
+{
+	margin-bottom: 2%
+	overflow-y: hidden;
+	
+}
+
+.ShopPanel
+{
+	background-color: #505250;
+	margin: 0px 1.5%;
+	border-radius: 5px;
+	overflow-y: auto;
+}
+
+.CartItem
+{
+	height: 30%;
+	margin: 0px 4% 3%; 
+	background-color: rgba(249, 243, 242, 0.3);
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.ShopPanel > div:first-child
+{
+	margin-top: 3%;
+}
+
+.infoShop
+{
+	padding: 0px;
+	margin: 5% 3%;
+}
+
+.infoShop > a
+{
+	cursor: pointer;
+}
+
+.infoShop > a, .infoShop > p
+{
+	color: #D1fFE9;
+	font-size: 14px;
+}
+
+.infoShop > a:first-child, .infoShop > p:first-child
+{
+	font-weight: bold;
+	font-size: 20px;
+	color: #D1fFE9;
+}
+
+.infoShop > p:first-child
+{
+	margin-top: 20px;
+}
+
+.CartItem > div:nth-child(3)
+{
+	margin-left: 7%;
+}
+
+/*Profile */
+
+.bannerPhoto
+{
+	height: 40%;
+	padding: 0px;
+}
+
+.bannerPhoto > img
+{
+	opacity: 0.8;
+}
+
+.profilePicture
+{
+	position:absolute;
+	z-index: 100;
+	top: 10%;
+	height: 80%;
+}
+
+.profilePicture > img
+{
+	border: 5px solid #BCC1C0;
+}
+
+.Options
+{
+	height: 10%;
+	background-color:#505250 ;
 }
