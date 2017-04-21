@@ -528,7 +528,8 @@ body
 {
 	position:absolute;
 	z-index: 100;
-	top: 10%;
+	top: 16%;
+	left: 1%;
 	height: 80%;
 }
 
@@ -537,8 +538,85 @@ body
 	border: 5px solid #BCC1C0;
 }
 
+.inputPhotoBanner
+{
+	z-index: 100;
+	position: absolute;
+	left: 91%;
+	bottom: -9%;
+}
+
+.filecamera {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	z-index: -1;
+}
+
+.filecamera + .labelcamera {
+    font-size: 4em;
+    font-weight: 700;
+    color: white;
+    display: inline-block;
+    cursor: pointer; 
+    opacity: 0.3;
+}
+
+.filecamera:focus + .labelcamera,
+.filecamera.has-focus + .labelcamera,
+.filecamera + .labelcamera:hover {
+    color: #76CCB1;
+    opacity: 1.0;
+}
+
 .Options
 {
 	height: 10%;
 	background-color:#505250 ;
+}
+
+.everythingElse
+{
+	height: 53%;
+	padding: 0px;
+	overflow-y: auto;
+	/*border-left: 1px solid red;
+	border-bottom: 1px solid red;*/
+}
+
+.editProfile
+{
+	background-color: rgba(80,82,80, 0.5);
+	/*background-color: #76CCB1;*/
+	height: 100%;
+}
+
+.listOfThings
+{
+	height: 100%;
+	overflow-y: auto;
+}
+
+.uploadButtons
+{
+	padding: 5% 2%;
+	background-color: rgba(249,243,242, 0.2);
+	height: 100%;
+}
+
+.uploadButtons > button:first-child
+{
+	margin-bottom: 30%;
+}
+
+.uploadButtons > button
+{
+	font-size: 1.3em;
+}
+
+.listOfThings .SearchResult
+{
+	height:70%;
+	margin: 10px 4%;
 }
