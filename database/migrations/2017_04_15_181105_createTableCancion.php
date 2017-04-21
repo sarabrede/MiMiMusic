@@ -17,7 +17,6 @@ class CreateTableCancion extends Migration
             $table->increments('idCancion');
             $table->string('tituloCancion', 50);
             $table->string('rutaCancion');
-            $table->float('precio')->default(0.0);
             $table->integer('idAlbum')->unsigned();
             $table->integer('idGenero')->unsigned();
             $table->timestamp('fechaPublicacion');
@@ -39,3 +38,4 @@ class CreateTableCancion extends Migration
         Schema::dropIfExists('Cancion');
     }
 }
+
