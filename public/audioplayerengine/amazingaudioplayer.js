@@ -344,7 +344,6 @@ objectId+"' style='position:absolute;top:0px;left:0px;'></div></div>";this.conta
 
 html5Audio.addEventListener("timeupdate",function(){
 	instance.amazingPlayer.playProgress(html5Audio.currentTime*1E3,html5Audio.duration*1E3);
-	//console.log(html5Audio.currentTime);
 });
 
 html5Audio.addEventListener("durationchange",function()
