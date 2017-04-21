@@ -21,14 +21,14 @@ class AlbumTableSeeder extends Seeder
         	'añoAlbum' => \Carbon\Carbon::now(),
         	'tituloAlbum' => 'The Midsummer Station',
         	'idUsuario' => 1,
-            'fotoAlbum' => 'audios/AlbumImages/08.jpg'
+            'fotoAlbum' => '../audioImages/08.jpg'
         	]);
 
         DB::table('Album')->insert([
         	'añoAlbum' => \Carbon\Carbon::now(),
         	'tituloAlbum' => 'Si',
         	'idUsuario' => 2,
-            'fotoAlbum' => 'audios/AlbumImages/09.jpg'
+            'fotoAlbum' => '../audioImages/09.jpg'
         	]);
     }
 }
