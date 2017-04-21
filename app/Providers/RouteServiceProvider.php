@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-
+        Route::pattern('searchParam', '[A-Za-z0-9 ñÑáÁéÉíÍóÓúÚ]+');
         parent::boot();
     }
 
