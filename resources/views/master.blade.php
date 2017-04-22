@@ -40,7 +40,7 @@
 					      		</button>
 		      				<a class="navbar-left col-xs-3 col-sm-12" href="{{ url('index') }}">
 		      				<img src="{{ asset('images/logo.png') }}" class="img-responsive logoNav">
-		      				<img src="images/minilogo.png" class="img-responsive logoNavSM"></a>
+		      				<img src="{{ asset('images/minilogo.png') }}" class="img-responsive logoNavSM"></a>
 		    			</div>
 	    			</div>
 	    			<div class="collapse navbar-collapse">
