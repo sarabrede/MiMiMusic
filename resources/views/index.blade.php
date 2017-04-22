@@ -2,31 +2,6 @@
 
 @section('title', 'Welcome!')
 
-@php
-	/*$songs = DB::table('Cancion')
-	->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
-	->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
-	->select('Cancion.*', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Usuario.nombreUsuario')
-	->orderby('fechaPublicacion', 'desc')
-	->limit(9)
-	->get();*/
-	/*$songs = DB::table('Cancion')
-	->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
-	->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
-	->select('Cancion.*', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Usuario.nombreUsuario')
-	->where('Usuario.idUsuario', '1')
-	->orderby('fechaPublicacion', 'desc')
-	->limit(9)
-	->get();*/
-	$songs = DB::table('Cancion')
-	->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
-	->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
-	->select('Cancion.*', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Usuario.nombreUsuario')
-	->orderby('visitas', 'desc')
-	->limit(9)
-	->get();
-@endphp
-
 @section('content')
 <div class="container">
 	<div class="panel panel-default musicPanel contenido">
