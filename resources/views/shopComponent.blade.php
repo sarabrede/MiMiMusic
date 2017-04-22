@@ -1,10 +1,10 @@
 <div class ="col-xs-11 CartItem">
 	<div class="col-xs-4 imageFrame">
-		<img src="{{ $image }}" width="100%" height="100%" class="img-rounded"/>
+		<img src="{{ asset($image) }}" width="100%" height="100%" class="img-rounded"/>
 	</div>
 
 	<div class="col-xs-4 infoShop">
-		<a> {{ $album }} </a> 
+		<a href="{{ url('album') }}/{{ $id }}" target="_blank"> {{ $album }} </a>
 		<br>
 		<a> {{ $author }} </a>
 		<br>
