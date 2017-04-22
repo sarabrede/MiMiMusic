@@ -6,16 +6,6 @@
 	<div> </div>
 @endsection
 
-@php
-	$songs = DB::table('Cancion')
-	->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
-	->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
-	->select('Cancion.*', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Usuario.nombreUsuario')
-	->orderby('fechaPublicacion', 'desc')
-	->limit(9)
-	->get();
-@endphp
-
 @section('content')
 	<div class="container-fluid containerPanel">
 			<div class="row rowLoginPanel">
