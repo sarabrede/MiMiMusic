@@ -9,7 +9,8 @@ LightBlue: #D1F4E9;
 
 
 html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body, 
-.searchRow, .SearchPills, .nav-tabs, .SearchPanel, .infoResult, .ShopPanel, .ShopRow, .Profile
+.searchRow, .SearchPills, .nav-tabs, .SearchPanel, .infoResult, .ShopPanel, .ShopRow, .Profile,
+.ListOptionsProfile
 {
 	height: 100%;
 	font-family: "Helvetica",Arial,sans-serif;
@@ -513,6 +514,7 @@ body
 
 /*Profile */
 
+
 .bannerPhoto
 {
 	height: 40%;
@@ -546,77 +548,163 @@ body
 	bottom: -9%;
 }
 
-.filecamera {
+.inputPhotoProfile
+{
+	z-index: 100;
+	position: absolute;
+	top: 10%;
+	left: 55%;
+	visibility: hidden;
+}
+
+.filecamera{
 	width: 0.1px;
 	height: 0.1px;
 	opacity: 0;
 	overflow: hidden;
 	z-index: -1;
 }
-
-.filecamera + .labelcamera {
-    font-size: 4em;
-    font-weight: 700;
-    color: white;
+.filecamera + .labelcamera 
+{
+	font-weight: 700;
     display: inline-block;
     cursor: pointer; 
-    opacity: 0.3;
 }
 
-.filecamera:focus + .labelcamera,
-.filecamera.has-focus + .labelcamera,
-.filecamera + .labelcamera:hover {
+.inputPhotoBanner .filecamera + .labelcamera {
+    font-size: 4em;
+    opacity: 0.3;
+    color: white;
+}
+
+.inputPhotoProfile .filecamera + .labelcamera{
+	font-size: 3em;
+	opacity: 1.0;
+	color: #76CCB1;
+}
+
+.hoverOverPhoto
+{
+	visibility: visible;
+}
+
+.inputPhotoBanner .filecamera:focus + .labelcamera,
+.inputPhotoBanner .filecamera.has-focus + .labelcamera,
+.inputPhotoBanner .filecamera + .labelcamera:hover {
     color: #76CCB1;
     opacity: 1.0;
 }
 
-.Options
-{
-	height: 10%;
-	background-color:#505250 ;
-}
 
 .everythingElse
 {
-	height: 53%;
+	height: 60%;
 	padding: 0px;
-	overflow-y: auto;
-	/*border-left: 1px solid red;
-	border-bottom: 1px solid red;*/
 }
 
 .editProfile
 {
-	background-color: rgba(80,82,80, 0.5);
-	/*background-color: #76CCB1;*/
-	height: 100%;
+	background-color: rgba(80,82,80, 0.9);
+	height: 150%;
+	margin: 2.5% 0px 0px 3%;
+	box-shadow: 7px 7px 5px #888888;
+	padding: 2% 3%;
+}
+
+.editProfile button:first-child
+{
+	margin-left: 75%;
+	margin-bottom: 10%;
+	opacity: 0.7;
+}
+
+.editProfile button:first-child:hover
+{
+	opacity: 1.0;
+}
+
+.editProfile label, .editProfile p
+{
+	color: #D1F4E9;
+	opacity: 0.9;
+	font-size: 1em;
+}
+
+.editProfile > label
+{
+	font-size: 1.1em;
+	margin-bottom: 10%;
 }
 
 .listOfThings
 {
 	height: 100%;
-	overflow-y: auto;
+	margin-left: 1%;
+}
+
+
+.listOfThings .SearchResult
+{
+	height:65%;
+	margin: 10px 4%;
+}
+
+.Options
+{
+	height: 10%;
+	background-color:#505250;
+}
+
+.Options li 
+{
+	display: table;
+	overflow: hidden;
+	height: 100%;
+}
+
+.Options li > div
+{
+	display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.Options li a
+{
+	color: #F9F3F2;
+	font-size: 1em;
+	vertical-align: middle;
+	text-align:center;
+    display: table-cell;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.Options .activeLink a, .Options a:hover
+{
+	font-size: 1.3em;
+	color: #76CCB1;
+	text-shadow: .3px .4px #BCC1C0;
+	font-weight: bold;
 }
 
 .uploadButtons
 {
-	padding: 5% 2%;
-	background-color: rgba(249,243,242, 0.2);
-	height: 100%;
-}
-
-.uploadButtons > button:first-child
-{
-	margin-bottom: 30%;
+	position: fixed;
+	padding: 0px;
+	left: 80%;
+	top: 60%;
 }
 
 .uploadButtons > button
 {
-	font-size: 1.3em;
+	opacity: 0.9;
+	margin-bottom: 10%;
+	margin-right: 5%;
 }
 
-.listOfThings .SearchResult
+.uploadButtons > button:hover
 {
-	height:70%;
-	margin: 10px 4%;
+	opacity: 1.0;
+	background-color: #F9F3F2;
 }
