@@ -3,14 +3,18 @@
 @section('title', 'Welcome!')
 
 @section('content')
+
+@php
+	$idUser = 1;
+@endphp
 <div class="container">
 	<div class="panel panel-default musicPanel contenido">
 		<div class="panel-body">
 			<div class="row rowPills hidden-xs visible-sm visible-md visible-lg">
 				<ul class="nav nav-pills text-center">
-					<li class="col-sm-4"><a href="#">Lo más nuevo</a></li>
-					<li class="active col-sm-4"><a href="#">Lo más popular</a></li>
-					<li class="col-sm-4"><a href="#">Suscripciones</a></li>
+					<li class="col-sm-4"><a href="{{ url('index') }}/newest">Lo más nuevo</a></li>
+					<li class="active col-sm-4"><a href="{{ url('index') }}/popularity">Lo más popular</a></li>
+					<li class="col-sm-4"><a href="{{ url('index') }}/subscribers/{{ $idUser }}">Suscripciones</a></li>
 				</ul>
 			</div>
 
