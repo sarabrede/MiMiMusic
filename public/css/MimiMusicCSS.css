@@ -10,11 +10,17 @@ LightBlue: #D1F4E9;
 
 html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body, 
 .searchRow, .SearchPills, .nav-tabs, .SearchPanel, .infoResult, .ShopPanel, .ShopRow, .Profile,
-.ListOptionsProfile, .songRow
+.ListOptionsProfile, .songRow, .rowLogin
 {
 	height: 100%;
 	font-family: "Helvetica",Arial,sans-serif;
 }
+
+/*.panel-body
+{
+	overflow: hidden;
+}*/
+
 
 
 /*Botones Genéricos*/
@@ -38,33 +44,46 @@ html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body,
 
 }
 
+.rowLogin
+{
+	padding: 0px 5% 5%;
+}
+
+@media screen and (min-width: 768px)
+{
+	.rowLogin
+	{
+		padding: 0px;
+	}
+}
+
 .loginPanel
 {
 	background-color: #505250;
-	padding: 4% 5%;
+	padding: 4% 4%;
 }
 
 	/*logo*/
 	.logoRow
 	{
 		width: 100%;
-		margin: auto auto;
+		margin-left: 10%;
 		height: 30%;
 	}
 
-/*@media (max-width: 544px), (min-width: px)
-	/*Para Tablets. De 426 a 768*/
-	/*@media screen and (min-width: 426px)
+
+	/*tablets*/
+	@media screen and (min-width: 426px)
 	{
 		.logoRow
 		{
-			width: 60%;
+			width: 80%;
 			margin-left: 20%;
 		}
 	}
 
-	/*Para compus*/
-	@media screen and (min-width: 992px)
+	/*Para compus.*/
+	@media screen and (min-width: 768px)
 	{
 		.logoRow
 		{
@@ -76,10 +95,8 @@ html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body,
 
 	.logo
 	{
-		/*background: url("../images/logo.png") 50% 50% no-repeat; */
 		width: 80%;
 		height:100%;
-		/*background-size: 100%;*/
 		padding: 0px;
 		margin: auto auto;
 	}
@@ -97,7 +114,8 @@ html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body,
 
 	.headerText
 	{
-		font-size: 5vmax;
+		color: rgb(118, 204, 177);
+		font-size: 25px;
 		color: rgb(118, 204, 177);
 		margin: 0.2vh 0%;
 	}
@@ -107,8 +125,8 @@ html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body,
 	{
 		.headerText
 		{
-			font-size: 5vmin;
-			margin: 1.5vh 0%;
+			font-size: 30px;
+			margin: 1% 0%;
 		}
 	}
 
@@ -124,32 +142,49 @@ html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body,
 	{
 		font-weight: normal;
 		color: rgb(118, 204, 177);
+		font-size: 13px;
 	}
 
 	@media screen and (min-width: 768px)
 	{
 		.formLogIn .form-group label
 		{
-			font-size: 2.5vmin;
+			font-size: 15px;
 		}
 	}
 
+	.formLogIn .form-control
+		{
+			font-size: 16px;
+			height: 36px;
+		}
+
+	@media screen and (min-width: 768px)
+	{
+		.formLogIn .form-control
+		{
+			font-size: 18px;
+			height: 46px;
+		}
+	}
+	
 	.loginPanel p
 	{
-		margin: 2vh 0;
+		margin: 1% 0;
 		color: #d3ece4;
-		font-size: 5vmin;
 		cursor: pointer;
+		font-size: 14px;
 	}
 
 	@media screen and (min-width: 768px)
 	{
 		.loginPanel p
 		{
-			font-size: 3vmin;
 			margin: 3% 0;
-		}	
+			font-size: 18px;
+		}
 	}
+	
 
 	.btnLogin
 	{
@@ -423,22 +458,34 @@ body
 
 .SearchResult
 {
-	height: 40%;
+	height: 42%;
 	margin: 10px 40px;
 	background-color: rgba(249, 243, 242, 0.3);
 	border-radius: 5px;
-	padding: 10px;
+	padding: 2% 1%;
 }
 
 .infoResult
 {
 	padding: 0px;
-	margin: 5% 3%;
+	margin: 1.5% 0px 1.5% 3%;
 }
+
 
 .infoResult > a
 {
 	cursor: pointer;
+}
+
+.listOfThings .infoResult > div:first-child
+{
+	height: 75%;
+}
+
+.listOfThings .infoResult > div:nth-child(2)
+{
+	height: 20%;
+	padding-right: .5%;
 }
 
 .infoResult > a, .infoResult > p
@@ -447,17 +494,26 @@ body
 	font-size: 14px;
 }
 
-.infoResult > a:first-child, .infoResult > p:first-child
+.infoResult > a:first-child
 {
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 1.5em;
 	color: #1475AD;
 }
 
-.infoResult > p:first-child
+.infoResult p:first-child
 {
-	margin-top: 20px;
+	color: #505250;
+	font-size: 1.4em;
+	font-style: italic;
+	font-weight: 600;
 }
+
+.SearchResult > div:nth-child(3)
+{
+	margin: 3% 2% 2% 0px;
+}
+
 
 /* Shopping Cart */
 
@@ -658,7 +714,12 @@ body
 .listOfThings .SearchResult
 {
 	height:65%;
-	margin: 10px 4%;
+	margin: 1.5% 4%;
+}
+
+.listOfThings .SearchResult > div:nth-child(3)
+{
+	margin-right: 0px;
 }
 
 .Options
@@ -701,26 +762,40 @@ body
 
 .uploadButtons
 {
-	position: fixed;
-	padding: 0px;
-	left: 80%;
-	top: 60%;
+	margin-top: 2%;
 }
 
-.uploadButtons > button
+.uploadButtons button
 {
 	opacity: 0.9;
-	margin-bottom: 10%;
-	margin-right: 5%;
+	margin-right: 4%;
+	border: .5px solid #505250;
 }
 
-.uploadButtons > button:hover
+.uploadButtons button:hover
 {
 	opacity: 1.0;
 	background-color: #F9F3F2;
 }
 
+.btnEditSong
+{
+	opacity: 0.8;
+	background-color: #BCC1C0;
+}
+
+.btnEditSong:hover
+{
+	opacity: 1.0;
+	background-color: #76CCB1;
+}
+
 /*Song Page */
+
+.songRow
+{
+	margin-right: 0px;
+}
 
 .songRow > div:first-child
 {
@@ -741,7 +816,7 @@ body
 	height: 100%;
 	width: 32%;
 	border-radius: 10px;
-	overflow-y: auto;
+	overflow-y: hidden;
 	padding-top: 1%;
 	padding-left: 1.5%;
 	box-shadow: -5px 5px 15px #888888;
@@ -756,11 +831,11 @@ body
 
 .songContainer
 {
-	height: 15%;
-	padding-left: 0px;
-	padding-top: 1%;
+	clear:left;
+	padding: 1.5% 15px 1% 0px;
 	opacity: 0.7;
 	margin-bottom: 1%;
+	overflow:hidden;
 }
 
 
@@ -804,7 +879,8 @@ body
 {
 	margin-top: 2%;
 	background-color: #505250;
-	height: 100%;
+	/*height: 100%;*/
+	overflow-y:hidden;
 	border-radius: 10px;
 	width: 32%;
 	box-shadow: -5px 5px 15px #888888;
