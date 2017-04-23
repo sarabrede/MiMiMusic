@@ -83,22 +83,22 @@
 
 						<div class="form-group">
 							<label>Email address:</label>
-							<p class="form-control-static">email@example.com</p>
+							<p class="form-control-static">{{ $info->correoElectronico }}</p>
 						</div>
 
 						<div class="form-group">
 							<label>Username:</label>
-							<p class="form-control-static">nombreusuario</p>
+							<p class="form-control-static">{{ $info->nombreUsuario }}</p>
 						</div>
 
 						<div class="form-group">
 							<label>Full Name:</label>
-							<p class="form-control-static">Nombre Completo</p>
+							<p class="form-control-static">{{ $info->nombreCompleto }}</p>
 						</div>
 
 						<div class="form-group">
 							<label>Country:</label>
-							<p class="form-control-static">Mexico</p>
+							<p class="form-control-static">{{ $info->nombrePais }}</p>
 						</div>
 
 						</form>
@@ -106,10 +106,10 @@
 
 					<div class="col-xs-7 listOfThings">
 					
-					@for($i = 0; $i < 3; $i++)
-						@component('searchComponent', ['id' => '1', 'title' => 'Título de la canción', 'author' => 'nombreUsuario', 'album' => 'Título del album', 'description' => 'descripcion', 'price' => '0', 'image' => '../audioImages/default.jpg'])
+					@foreach ($songs as $song)
+						@component('searchComponent', ['id' => $song->idCancion, 'title' => $song->tituloCancion, 'author' => $song->nombreUsuario, 'album' => $song->tituloAlbum, 'description' => $song->descripcion, 'price' => $song->precio, 'image' => $song->fotoAlbum, 'idUser' => $song->idUsuario, 'genre' => $song->nombreGenero, 'idAlbum' => $song->idAlbum])
 						@endcomponent
-					@endfor
+					@endforeach
 					</div>
 
 					<div class="uploadButtons">
@@ -128,3 +128,4 @@
 	</div>
 </div>
 @endsection
+
