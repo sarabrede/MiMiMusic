@@ -3,11 +3,11 @@
 		<img src="../images/defaultUser.png" width="100%" height="100%" class="img-circle"/>
 	</div>
 	<div class="col-xs-7">
-		<a href="#"> usuario </a>
-		<p> -(-10) papw, super prron </p>
+		<a href="{{ url('profile') }}/{{ $idUser }}" target="_blank"> {{ $user }} </a>
+		<p> {{ $msg }} </p>
 	</div>
 	<div class="col-xs-2 text-right dateOfComment">
-		<p> 07/02/2017 </p>
+		<p> {{ $fecha }} </p>
 	</div>
 </div>
 
