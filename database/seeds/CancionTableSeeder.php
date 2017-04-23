@@ -109,5 +109,3 @@ class CancionTableSeeder extends Seeder
             ]);
     }
 }
-
-
