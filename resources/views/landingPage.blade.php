@@ -9,28 +9,49 @@
 @section('content')
 	<div class="container-fluid containerPanel">
 			<div class="row rowLoginPanel">
-				<div class="col-md-4 col-sm-12 loginPanel text-center">
+				<div class="col-sm-4 col-xs-12 loginPanel text-center">
+
 					<div class="row logoRow">
 						<div class="col-xs-12 logo">
 							<img src = "../images/logo.png" width="100%" height="100%"/>
 						</div>
 					</div>
-					<form class="formLogIn">
-						<label class="headerText"> Log In </label> 
-						<div class="form-group form-group-lg row">
-							<label for="emailInput" class="pull-left">Email address:</label>
-							<input type="text" class="form-control" id="emailInput" placeholder="Username / Email" />
-						</div>
-						<div class="form-group form-group-lg row">
-							<label for="passwordInput" class="pull-left">Password:</label>
-							<input type="password" class="form-control" id="passwordInput" placeholder="Password" />
-						</div>
-						<input type="submit" class="btn btn-lg btnLogin" value="Log in"/>
-						<p> Are you new here? <u> Sign up now! </u></p>
-					</form>
+
+					<div class="row">
+							<form class="formLogIn">
+								<div class="col-xs-12 rowLogin">
+								<div class="col-xs-12">
+									<label class="headerText"> Log In </label> 
+								</div>
+								
+								<div class="col-xs-12">
+									<div class="form-group form-group-lg row">
+										<label for="emailInput" class="pull-left">Email address:</label>
+										<input type="text" class="form-control" id="emailInput" placeholder="Username / Email" />
+									</div>
+								</div>
+								
+								<div class="col-xs-12">
+									<div class="form-group form-group-lg row">
+									<label for="passwordInput" class="pull-left">Password:</label>
+									<input type="password" class="form-control" id="passwordInput" placeholder="Password" />
+								</div>
+								</div>
+
+								<div class="col-xs-12">
+									<input type="submit" class="btn btn-lg btnLogin" value="Log in"/>
+								<p> Are you new here? <u> Sign up now! </u></p>
+								</div>
+								</div>
+							</form>
+						
+						
+					</div>
+
+					
 					
 				</div>
-				<div class="col-md-8 col-sm-12 imagePanel">
+				<div class="col-sm-8 col-xs-12 imagePanel">
 					<div class="panel panel-default musicPanel">
 						<div class="panel-body">
 							<form class="form-group">
@@ -53,7 +74,7 @@
 				</div>
 			</div>
 
-	<div class="row footer hidden-xs hidden-sm visible-md visible-lg">
+	<div class="row footer hidden-xs visible-sm visible-md visible-lg">
 				<div class="col-md-12">
 					<p class="text-center"> <small> <span class="glyphicon glyphicon-copyright-mark"></span>2017 MiMiMusic - All right reserved</small></p>
 				</div>
