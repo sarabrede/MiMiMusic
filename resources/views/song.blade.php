@@ -33,34 +33,21 @@
 						</div>
 					</div>
 							
-
 					<div class="col-xs-4 listOfSongs">
 						<p> {{ $song->tituloAlbum }} </p>
 
-							<div class="col-xs-12 songContainer activeSong">
-								<div class="col-xs-9 nameSong">
-									<a href="#"> {{ $song->tituloCancion }} </a>
-								</div>
-								<div class="col-xs-2 pull-right timeSong">
-									<p> 3:50 </p>
-								</div>
-							</div>
+						@foreach($album as $single)
+							@component('songComponent', ['id' => $single->idCancion, 'title' => $single->tituloCancion, 'description' => $single->descripcion, 'idAlbum' => $single->idAlbum, 'idSong' => $idSong])
+							@endcomponent
+						@endforeach
 
-
-							@for($i = 0; $i < 10; $i++)
-								@component('songComponent')
-								@endcomponent
-							@endfor
-								
-							
-						
 					</div>
 				</div>
 
 				<div class="col-xs-12 reproductorColumn">
 					<div class="col-xs-6 reproductor">
 						<audio controls class="audioHtml">
-						  <source src="horse.ogg" type="audio/ogg">
+						  <source src="{{ $song->rutaCancion }}" type="audio/mp3">
 						</audio>
 					</div>
 				</div>
@@ -83,23 +70,21 @@
 							</button>
 						</div>
 
-						@for($i = 0; $i < 5; $i++)
-							@component('comment')
+						@foreach($comments as $comment)
+							@component('comment', ['user' => $comment->nombreUsuario, 'msg' => $comment->comentario, 'fecha' => $comment->fechaComentario, 'idUser' => $comment->idUsuario])
 							@endcomponent
-						@endfor
-						
+						@endforeach
 
 					</div>
 
 					<div class="col-xs-4 descriptionPanel">
-						<a href="#"> {{ $song->nombreUsuario }} </a>
+						<a href="{{ url('profile') }}/{{ $song->idUsuario }}" target="_blank"> {{ $song->nombreUsuario }} </a>
 				
 						<p> {{ $song->fechaPublicacion }} </p>
 				
 						<p> {{ $song->descripcion }} </p>
 						<p> Views: {{ $song->visitas }} </p>
 						
-
 					</div>
 				</div>
 			</div>
