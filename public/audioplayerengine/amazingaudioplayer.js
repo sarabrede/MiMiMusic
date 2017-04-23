@@ -133,7 +133,7 @@ var AmazingAudioPlatforms=
 
 				if(this.options.showtitle||this.options.showinfo)
 				{
-					this.$text=$("<div class='amazingaudioplayer-text'></div>");
+					this.$text=$("<div class='amazingaudioplayer-text prfctScrollBar'></div>");
 					this.$text.appendTo(this.container);
 
 					if(this.options.showtitle)
