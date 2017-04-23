@@ -33,7 +33,7 @@
 						</div>
 					</div>
 							
-					<div class="col-xs-4 listOfSongs">
+					<div class="col-xs-4 listOfSongs prfctScrollBar">
 						<p> {{ $song->tituloAlbum }} </p>
 
 						@foreach($album as $single)
@@ -44,8 +44,8 @@
 					</div>
 				</div>
 
-				<div class="col-xs-12 reproductorColumn">
-					<div class="col-xs-6 reproductor">
+				<div class="col-xs-11 reproductorColumn">
+					<div class="col-xs-7 reproductor">
 						<audio controls class="audioHtml">
 						  <source src="{{ $song->rutaCancion }}" type="audio/mp3">
 						</audio>
