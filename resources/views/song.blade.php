@@ -29,17 +29,17 @@
           						<span class="glyphicon glyphicon-heart"></span>
         					</button>
 
-        					<p class="songName"> Nombre de la canción </p>
+        					<p class="songName"> {{ $song->tituloCancion }} </p>
 						</div>
 					</div>
 							
 
 					<div class="col-xs-4 listOfSongs">
-						<p> Nombre del Album </p>
+						<p> {{ $song->tituloAlbum }} </p>
 
 							<div class="col-xs-12 songContainer activeSong">
 								<div class="col-xs-9 nameSong">
-									<a href="#"> Nombre de la canción </a>
+									<a href="#"> {{ $song->tituloCancion }} </a>
 								</div>
 								<div class="col-xs-2 pull-right timeSong">
 									<p> 3:50 </p>
@@ -92,12 +92,12 @@
 					</div>
 
 					<div class="col-xs-4 descriptionPanel">
-						<a href="#"> NombredeUsuario </a>
+						<a href="#"> {{ $song->nombreUsuario }} </a>
 				
-						<p> 07/06/2017 </p>
+						<p> {{ $song->fechaPublicacion }} </p>
 				
-						<p> Description </p>
-						<p> Views: 1,000,000 </p>
+						<p> {{ $song->descripcion }} </p>
+						<p> Views: {{ $song->visitas }} </p>
 						
 
 					</div>
