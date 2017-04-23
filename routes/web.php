@@ -20,3 +20,5 @@ Route::get('/search/{searchParam?}/{type?}', 'SongController@searchSong');
 Route::get('/shop', 'AlbumController@shopAlbum');
 
 Route::get('/profile/{userProfile}', 'UserController@profileUser');
+
+Route::get('/song/{idSong}', 'SongController@getSong');
