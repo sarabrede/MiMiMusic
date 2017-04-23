@@ -17,7 +17,8 @@ class UsersTableSeeder extends Seeder
         	'correoElectronico' => 'sara_brede@hotmail.com',
         	'contraseña' => 'uwu',
             'nombreCompleto' => 'Sara Victoria Brede Treviño', 
-        	'fechaCreacion' => \Carbon\Carbon::now()
+        	'fechaCreacion' => \Carbon\Carbon::now(),
+            'idPais' => 2
         	]);
 
         DB::table('Usuario')->insert([
@@ -26,7 +27,8 @@ class UsersTableSeeder extends Seeder
         	'correoElectronico' => 'ALFREDO_950207@hotmail.com',
         	'contraseña' => 'si',
             'nombreCompleto' => 'Edgar Alfredo Martínez Monjarás', 
-        	'fechaCreacion' => \Carbon\Carbon::now()
+        	'fechaCreacion' => \Carbon\Carbon::now(),
+            'idPais' => 1
         	]);
     }
 }
