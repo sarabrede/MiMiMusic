@@ -15,10 +15,12 @@ Route::get('/', 'SongController@landingSongs');
 
 Route::get('/index/{type?}/{idUser?}', 'SongController@indexSong');
 
-Route::get('/search/{searchParam?}/{type?}', 'SongController@searchSong');
+Route::get('/search/{type?}/{searchParam?}', 'SongController@searchSong');
 
 Route::get('/shop', 'AlbumController@shopAlbum');
 
 Route::get('/profile/{userProfile}', 'UserController@profileUser');
 
 Route::get('/song/{idSong}', 'SongController@getSong');
+
+Route::get('/album/{idAlbum}', 'AlbumController@getSong');
