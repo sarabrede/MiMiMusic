@@ -17,25 +17,27 @@ class CancionTableSeeder extends Seeder
             'tituloCancion' => 'Cornman',
             'rutaCancion' => $path.'4._Cornman.mp3',
             'idAlbum' => 1,
-            'idGenero' => 9,
+            'idGenero' => 1,
             'fechaPublicacion' => \Carbon\Carbon::now(),
-            'descripcion' => 'Mexicanota'
+            'descripcion' => 'Mexicanota',
+            'visitas' => 1
             ]);
 
         DB::table('Cancion')->insert([
             'tituloCancion' => 'Introducción A La Cartografía',
             'rutaCancion' => $path.'05_Introducción_A_La_Cartografía.mp3',
             'idAlbum' => 1,
-            'idGenero' => 9,
+            'idGenero' => 1,
             'fechaPublicacion' => \Carbon\Carbon::now(),
-            'descripcion' => 'Sadboi'
+            'descripcion' => 'Sadboi',
+            'visitas' => 10
             ]);
 
         DB::table('Cancion')->insert([
             'tituloCancion' => 'Barracuda',
             'rutaCancion' => $path.'Barracuda.mp3',
             'idAlbum' => 1,
-            'idGenero' => 9,
+            'idGenero' => 3,
             'fechaPublicacion' => \Carbon\Carbon::now(),
             'descripcion' => 'uuuuuhhhh Barracuda'
             ]);
@@ -44,16 +46,17 @@ class CancionTableSeeder extends Seeder
             'tituloCancion' => 'Cliffs of dover',
             'rutaCancion' => $path.'Cliffs_of_dover.mp3',
             'idAlbum' => 1,
-            'idGenero' => 9,
+            'idGenero' => 2,
             'fechaPublicacion' => \Carbon\Carbon::now(),
-            'descripcion' => 'bst rock song evah'
+            'descripcion' => 'bst rock song evah',
+            'visitas' => 14
             ]);
 
         DB::table('Cancion')->insert([
             'tituloCancion' => 'Cruel angel´s tesis',
             'rutaCancion' => $path.'Cruel_angel´s_tesis.mp3',
             'idAlbum' => 1,
-            'idGenero' => 9,
+            'idGenero' => 6,
             'fechaPublicacion' => \Carbon\Carbon::now(),
             'descripcion' => 'subete al eva shinji'
             ]);
@@ -62,9 +65,10 @@ class CancionTableSeeder extends Seeder
             'tituloCancion' => 'Everybodys Circulation (Mashup)',
             'rutaCancion' => $path.'Everybodys_Circulation_(Mashup).mp3',
             'idAlbum' => 3,
-            'idGenero' => 9,
+            'idGenero' => 7,
             'fechaPublicacion' => \Carbon\Carbon::now(),
-            'descripcion' => 'Bst song ever'
+            'descripcion' => 'Bst song ever',
+            'visitas' => 114
             ]);
 
         DB::table('Cancion')->insert([
@@ -73,7 +77,8 @@ class CancionTableSeeder extends Seeder
         	'idAlbum' => 1,
         	'idGenero' => 9,
         	'fechaPublicacion' => \Carbon\Carbon::now(),
-        	'descripcion' => '420% TsundereLevel'
+        	'descripcion' => '420% TsundereLevel',
+            'visitas' => 10
         	]);
 
         DB::table('Cancion')->insert([
@@ -104,4 +109,5 @@ class CancionTableSeeder extends Seeder
             ]);
     }
 }
+
 
