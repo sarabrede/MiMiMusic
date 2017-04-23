@@ -14,7 +14,8 @@ class AlbumTableSeeder extends Seeder
         DB::table('Album')->insert([
         	'añoAlbum' => \Carbon\Carbon::now(),
         	'tituloAlbum' => 'Tsundere Records',
-        	'idUsuario' => 2
+        	'idUsuario' => 2,
+            'precio' => 5.50
         	]);
 
         DB::table('Album')->insert([
@@ -28,7 +29,9 @@ class AlbumTableSeeder extends Seeder
         	'añoAlbum' => \Carbon\Carbon::now(),
         	'tituloAlbum' => 'Si',
         	'idUsuario' => 2,
-            'fotoAlbum' => '../audioImages/09.jpg'
+            'fotoAlbum' => '../audioImages/09.jpg',
+            'precio' => 1.25
         	]);
     }
 }
+
