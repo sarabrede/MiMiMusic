@@ -6,7 +6,7 @@
 	<div class="col-xs-4 infoShop">
 		<a href="{{ url('album') }}/{{ $id }}" target="_blank"> {{ $album }} </a>
 		<br>
-		<a> {{ $author }} </a>
+		<a href="{{ url('profile') }}/{{ $idAuthor }}" target="_blank"> {{ $author }} </a>
 		<br>
 		<p> {{ $numSongs }} </p>
 	</div>
