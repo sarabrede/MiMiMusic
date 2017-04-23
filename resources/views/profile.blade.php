@@ -71,6 +71,21 @@
 				</div>
 
 				<div class="col-xs-12 everythingElse">
+					<div class="col-xs-12 uploadButtons">
+						<div class="col-xs-4">
+						</div>
+
+						<div class="col-xs-4">
+							<button type="button" class="btn">
+	         					<span class="glyphicon glyphicon-upload"></span> Upload Song
+	        				</button>
+
+	        				<button type="button" class="btn">
+	         					<span class="glyphicon glyphicon-trash"></span> Delete Songs
+	        				</button>
+						</div>
+						
+					</div>
 					<div class="col-xs-3 editProfile">
 
 						<button type="button" class="btn btn-sm">
@@ -107,21 +122,12 @@
 					<div class="col-xs-7 listOfThings">
 					
 					@foreach ($songs as $song)
-						@component('searchComponent', ['id' => $song->idCancion, 'title' => $song->tituloCancion, 'author' => $song->nombreUsuario, 'album' => $song->tituloAlbum, 'description' => $song->descripcion, 'price' => $song->precio, 'image' => $song->fotoAlbum, 'idUser' => $song->idUsuario, 'genre' => $song->nombreGenero, 'idAlbum' => $song->idAlbum])
+						@component('userSongComponent', ['id' => $song->idCancion, 'title' => $song->tituloCancion, 'author' => $song->nombreUsuario, 'album' => $song->tituloAlbum, 'description' => $song->descripcion, 'price' => $song->precio, 'image' => $song->fotoAlbum, 'idUser' => $song->idUsuario, 'genre' => $song->nombreGenero, 'idAlbum' => $song->idAlbum])
 						@endcomponent
 					@endforeach
 					</div>
 
-					<div class="uploadButtons">
-						<button type="button" class="btn">
-         					<span class="glyphicon glyphicon-upload"></span> Upload Song
-        				</button>
-
-        				<button type="button" class="btn">
-         					<span class="glyphicon glyphicon-trash"></span> Delete Songs
-        				</button>
-
-					</div>
+				
 				</div>
 			</div>
 		</div>
