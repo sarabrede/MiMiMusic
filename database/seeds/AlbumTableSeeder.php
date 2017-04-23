@@ -34,4 +34,3 @@ class AlbumTableSeeder extends Seeder
         	]);
     }
 }
-
