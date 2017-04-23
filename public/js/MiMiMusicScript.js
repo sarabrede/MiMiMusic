@@ -15,4 +15,9 @@ $(document).ready(function() {
 	$(".profilePicture").mouseout(function(){
 		$(".inputPhotoProfile").removeClass("hoverOverPhoto");
 	});
+
+	/*Song*/
+
+	/*Poner el scrollbar a la lista de canciones*/
+	$(".prfctScrollBar").perfectScrollbar();
 });
