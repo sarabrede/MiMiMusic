@@ -14,7 +14,7 @@
 					@if(sizeof($albums) > 0)
 
 					@foreach ($albums as $album)
-						@component('shopComponent', ['id' => $album->idAlbum, 'album' => $album->tituloAlbum, 'image' => $album->fotoAlbum, 'author' => $album->nombreUsuario, 'numSongs' => 'Total songs: '.$album->count, 'price' => $album->precio])
+						@component('shopComponent', ['id' => $album->idAlbum, 'album' => $album->tituloAlbum, 'image' => $album->fotoAlbum, 'author' => $album->nombreUsuario, 'numSongs' => 'Total songs: '.$album->count, 'price' => $album->precio, 'idAuthor' => $album->idUsuario])
 						@endcomponent
 						@php
 							$total += $album->precio;
