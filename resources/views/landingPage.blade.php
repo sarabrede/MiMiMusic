@@ -9,9 +9,11 @@
 @section('content')
 	<div class="container-fluid containerPanel">
 			<div class="row rowLoginPanel">
-				<div class="col-sm-4 loginPanel text-center">
+				<div class="col-md-4 col-sm-12 loginPanel text-center">
 					<div class="row logoRow">
-						<div class="col-sm-12 logo"></div>
+						<div class="col-xs-12 logo">
+							<img src = "../images/logo.png" width="100%" height="100%"/>
+						</div>
 					</div>
 					<form class="formLogIn">
 						<label class="headerText"> Log In </label> 
@@ -28,7 +30,7 @@
 					</form>
 					
 				</div>
-				<div class="col-sm-8 imagePanel">
+				<div class="col-md-8 col-sm-12 imagePanel">
 					<div class="panel panel-default musicPanel">
 						<div class="panel-body">
 							<form class="form-group">
@@ -50,10 +52,8 @@
 					</div>
 				</div>
 			</div>
-@endsection
 
-@section('footer')
-	<div class="row footer hidden-xs visible-sm visible-md visible-lg">
+	<div class="row footer hidden-xs hidden-sm visible-md visible-lg">
 				<div class="col-md-12">
 					<p class="text-center"> <small> <span class="glyphicon glyphicon-copyright-mark"></span>2017 MiMiMusic - All right reserved</small></p>
 				</div>
