@@ -1,6 +1,7 @@
 # MiMiMusic
 
 Para entrar a las vistas:
+
 localhost:8000 (landingPage)
 localhost:8000/index (Página principal)
 localhost:8000/search(Búsqueda)
