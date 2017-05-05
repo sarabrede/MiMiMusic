@@ -138,7 +138,7 @@ html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body,
 		}
 	}
 
-	.formLogIn .form-group label
+	.formLogIn .form-group label, .formSignUp .form-group label
 	{
 		font-weight: normal;
 		color: rgb(118, 204, 177);
@@ -147,7 +147,7 @@ html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body,
 
 	@media screen and (min-width: 768px)
 	{
-		.formLogIn .form-group label
+		.formLogIn .form-group label, .formSignUp .form-group label
 		{
 			font-size: 15px;
 		}
@@ -201,7 +201,20 @@ html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body,
 		}
 	}
 
+	.btnSignUp
+	{
+		font-size: 4vmin;
+		margin-top: .1%;
+	}
+
 /*End Login Panel*/
+
+.formSignUp 
+{
+	display: none;
+}
+
+
 
 .footer
 {
@@ -304,11 +317,18 @@ body
 
 .nav-pills>li>a
 {
-	border: 1.5px groove rgb(80, 82, 80);
+	border: 1.5px solid rgb(80, 82, 80);
 	border-radius: 7px;
+	background-color: #BCC1C0;
+	color: #505250;
 }
 
-.nav-pills>li.active>a
+.nav-pills>li>a:hover
+{
+	background-color: #D1F4E9;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover
 {
 	background-color: rgb(80, 82, 80);
 }
