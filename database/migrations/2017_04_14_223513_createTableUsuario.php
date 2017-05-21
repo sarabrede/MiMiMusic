@@ -17,7 +17,7 @@ class CreateTableUsuario extends Migration
             $table->increments('idUsuario');
             $table->string('nombreUsuario', 50)->unique();
             $table->string('correoElectronico', 50)->unique();
-            $table->string('nombreCompleto', 200);
+            $table->string('nombreCompleto', 200)->nullable();
             $table->string('contraseña', 32);
             $table->string('fotoPerfil')->default('images/defaultUser.png');
             $table->string('fotoBanner')->default('images/defaultBanner.jpg');
