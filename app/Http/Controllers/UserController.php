@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Usuario;
 use DB;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -30,5 +32,17 @@ class UserController extends Controller
 		->limit(20)
 		->get();
         return $songs;
+    }
+
+    public function addUser(Request $request) {
+    	$usuario = new Usuario;
+
+    	$usuario->correoElectronico = $request->input('emailInput');
+    	$usuario->nombreUsuario = $request->input('usernameInput');
+    	$usuario->contraseña = $request->input('passwordInput');
+    	$usuario->nombreCompleto = 'JEJ';
+
+        $usuario->save();
+        return redirect('index');
     }
 }
