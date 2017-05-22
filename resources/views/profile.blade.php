@@ -11,6 +11,39 @@
 @endsection
 
 @section('content')
+<script type="text/javascript">
+function uploadSong() {
+	alert('JEJ');
+}
+	$(document).ready(function(){
+	dialog = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 400,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Upload Song": uploadSong,
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        //form[ 0 ].reset();
+        //allFields.removeClass( "ui-state-error" );
+      }
+    });
+ 
+    form = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      //hacer el upload
+      alert('usuario :O');
+    });
+ 
+    $( "#btnUploadSong" ).button().on( "click", function() {
+      dialog.dialog( "open" );
+    });
+});
+</script>
 <div class="container">
 	<div class="panel panel-default musicPanel contenido" id="ProfilePage">
 		<div class="panel-body">
@@ -76,7 +109,7 @@
 						</div>
 
 						<div class="col-xs-4">
-							<button type="button" class="btn">
+							<button type="button" class="btn" id="btnUploadSong">
 	         					<span class="glyphicon glyphicon-upload"></span> Upload Song
 	        				</button>
 
@@ -127,10 +160,26 @@
 					@endforeach
 					</div>
 
-				
+					<button id="create-user">Create new user</button>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+<div id="dialog-form" title="Upload a Song">
+	<p class="validateTips">All form fields are required.</p>
+  	<form>
+    	<fieldset>
+      		<label for="name">Name</label>
+      		<input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+      		<label for="email">Email</label>
+		    <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+		    <label for="password">Password</label>
+		    <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+ 
+      		<!-- Allow form submission with keyboard without duplicating the dialog button -->
+      		<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    	</fieldset>
+  	</form>
 </div>
 @endsection
