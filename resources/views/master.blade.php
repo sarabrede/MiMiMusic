@@ -8,6 +8,9 @@
 
 		<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" >
 		<link href="{{ asset('css/MimiMusicCSS.css') }}" rel="stylesheet" type="text/css" >
+		<link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet" type="text/css" >
+		<link href="{{ asset('css/jquery-ui.structure.css') }}" rel="stylesheet" type="text/css" >
+		<link href="{{ asset('css/jquery-ui.theme.css') }}" rel="stylesheet" type="text/css" >
 
 		{{-- Audio Player --}}
 		<link href="{{ asset('audioplayerengine/initaudioplayer.css') }}" rel="stylesheet" type="text/css" >
@@ -15,7 +18,20 @@
 		{{--PerfectScrollBar --}}
 		<link href="{{ asset('css/perfect-scrollbar.min.css') }}" rel="stylesheet" type="text/css" >
 
-	
+		{{--<script type="text/javascript" src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>--}}
+		<script type="text/javascript" src="{{ asset('audioplayerengine/jquery.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/MiMiMusicScript.js') }}"></script>
+
+		{{--Amazing AudioPlayer --}}
+		
+		<script type="text/javascript" src="{{ asset('audioplayerengine/amazingaudioplayer.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('audioplayerengine/initaudioplayer.js') }}"></script>
+
+		{{--PerfectScrollBar --}}
+			<script type="text/javascript" src="{{ asset('js/perfect-scrollbar.jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/perfect-scrollbar.min.js') }}"></script>
 
 		<style>
 		@yield('style')
@@ -107,19 +123,6 @@
 		@show
 
 		@yield('content')
-
-		<script type="text/javascript" src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/MiMiMusicScript.js') }}"></script>
-
-		{{--Amazing AudioPlayer --}}
-		<script type="text/javascript" src="{{ asset('audioplayerengine/jquery.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('audioplayerengine/amazingaudioplayer.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('audioplayerengine/initaudioplayer.js') }}"></script>
-
-		{{--PerfectScrollBar --}}
-			<script type="text/javascript" src="{{ asset('js/perfect-scrollbar.jquery.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/perfect-scrollbar.min.js') }}"></script>
 
 	</body>
 </html>
