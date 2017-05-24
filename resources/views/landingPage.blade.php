@@ -16,21 +16,22 @@
 					</div>
 				</div>
 				<div class="row">
-					<form class="formLogIn">
+					<form class="formLogIn" action="/logIn" method="POST">
+					{{ csrf_field() }}
 						<div class="col-xs-12 rowLogin">
 							<div class="col-xs-12">
 								<label class="headerText"> Log In </label> 
 							</div>
 							<div class="col-xs-12">
 								<div class="form-group form-group-lg row">
-									<label for="emailInput" class="pull-left">Email address:</label>
-									<input type="text" class="form-control" id="emailInput" placeholder="Username / Email" />
+									<label for="emailInputlog" class="pull-left">Email address:</label>
+									<input type="text" class="form-control" id="emailInputlog" placeholder="Username / Email" name="emailInputlog" />
 								</div>
 							</div>
 							<div class="col-xs-12">
 								<div class="form-group form-group-lg row">
-									<label for="passwordInput" class="pull-left">Password:</label>
-									<input type="password" class="form-control" id="passwordInput" placeholder="Password" />
+									<label for="passwordInputlog" class="pull-left">Password:</label>
+									<input type="password" class="form-control" id="passwordInputlog" placeholder="Password" name="passwordInputlog"/>
 								</div>
 							</div>
 							<div class="col-xs-12">
