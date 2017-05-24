@@ -45,4 +45,23 @@ class UserController extends Controller
         $usuario->save();
         return redirect('index');
     }
+
+    public function logIn(Request $request){
+
+        $usuario = DB::table('Usuario')
+        ->select('Usuario.*')
+        ->where(function($query) use(&$request) {
+            $query->where('Usuario.nombreUsuario', '=', $request->input('emailInputlog'))
+            ->where('Usuario.contraseña', '=', $request->input('passwordInputlog'));
+        })
+        ->orWhere(function($query) use(&$request) {
+            $query->where('Usuario.correoElectronico', '=', $request->input('emailInputlog'))
+            ->where('Usuario.contraseña', '=', $request->input('passwordInputlog'));
+        })
+        ->first();
+        session(['idUser' => $usuario->idUsuario, 'nombreUsuario' => $usuario->nombreUsuario]);
+
+        return redirect('index');
+    }
+
 }
