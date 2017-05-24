@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'X\'s Profile')
+@section('title', $info->nombreUsuario.'\'s Profile')
 
 @section('style')
 
@@ -12,37 +12,35 @@
 
 @section('content')
 <script type="text/javascript">
-function uploadSong() {
-	alert('JEJ');
-}
-	$(document).ready(function(){
-	dialog = $( "#dialog-form" ).dialog({
-      autoOpen: false,
-      height: 400,
-      width: 350,
-      modal: true,
-      buttons: {
-        "Upload Song": uploadSong,
-        Cancel: function() {
-          dialog.dialog( "close" );
-        }
-      },
-      close: function() {
-        //form[ 0 ].reset();
-        //allFields.removeClass( "ui-state-error" );
-      }
-    });
- 
-    form = dialog.find( "form" ).on( "submit", function( event ) {
-      event.preventDefault();
-      //hacer el upload
-      alert('usuario :O');
-    });
- 
-    $( "#btnUploadSong" ).button().on( "click", function() {
-      dialog.dialog( "open" );
-    });
-});
+	function uploadSong() {
+		alert('JEJ');
+	}
+	$(document).ready(function() {
+		dialog = $( "#dialog-form" ).dialog( {
+	    	autoOpen: false,
+	    	height: 400,
+	    	width: 350,
+	    	modal: true,
+	    	buttons: {
+	        	"Upload Song": uploadSong,
+	        	Cancel: function() {
+	        		dialog.dialog( "close" );
+	        	}
+	    	},
+	    	close: function() {
+	        //form[ 0 ].reset();
+	        //allFields.removeClass( "ui-state-error" );
+			}
+	    });
+	    form = dialog.find( "form" ).on( "submit", function( event ) {
+	    	event.preventDefault();
+	    	//hacer el upload
+	    	alert('usuario :O');
+	    });
+	    $( "#btnUploadSong" ).button().on( "click", function() {
+	    	dialog.dialog( "open" );
+	    });
+	});
 </script>
 <div class="container">
 	<div class="panel panel-default musicPanel contenido" id="ProfilePage">
