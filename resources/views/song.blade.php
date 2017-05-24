@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Song')
+@section('title', $song->tituloCancion)
 
 @section('style')
 .panel-body{
