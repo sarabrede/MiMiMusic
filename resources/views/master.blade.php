@@ -8,10 +8,10 @@
 		<link rel="icon" type="image/png" href="{{ asset('images/favicon.ico') }}" />
 
 		<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" >
-		<link href="{{ asset('css/MimiMusicCSS.css') }}" rel="stylesheet" type="text/css" >
 		<link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet" type="text/css" >
 		<link href="{{ asset('css/jquery-ui.structure.css') }}" rel="stylesheet" type="text/css" >
 		<link href="{{ asset('css/jquery-ui.theme.css') }}" rel="stylesheet" type="text/css" >
+		<link href="{{ asset('css/MimiMusicCSS.css') }}" rel="stylesheet" type="text/css" >
 
 		{{-- Audio Player --}}
 		<link href="{{ asset('audioplayerengine/initaudioplayer.css') }}" rel="stylesheet" type="text/css" >
@@ -77,6 +77,14 @@
 					    		<li>
 			      		  	</ul>
 		      		  	</div>
+
+
+		      		  	@php
+		      		  	$nombreUsuario = session('nombreUsuario', 'default');
+		      		  	$imageUser = session('fotoUser', 'default');
+		      		  	@endphp
+
+		      		  	@if( strcmp($nombreUsuario, "default") == 0)
 						<div class="col-sm-3">
 							<ul class="nav navbar-nav navbar-right">
 						    	<li class="dropdown">
@@ -117,6 +125,32 @@
 						        </li>
 						    </ul>
 						</div>
+						
+						@else
+						<div class="col-sm-3 profilePhotoNavBar">
+							<ul class="nav navbar-nav navbar-right">
+
+								<li class="col-sm-2">
+									<img src="{{ asset($imageUser) }}" width="100%" height="100%" class="img-circle"/>
+								</li>
+
+								<li class="col-sm-4 colProfile"> 
+									<a class="profileName">  {{ $nombreUsuario }} </a>
+								</li>
+								
+								<li class="dropdown col-sm-1">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"> </a>
+  									<ul class="dropdown-menu logoutddmenu">
+									    <li>
+									    	<a style="color: #D1F4E9"> <span class="glyphicon glyphicon-log-out"></span> Log out </a>
+										</li>
+								  </ul>
+								</li>
+
+							</ul>
+						</div>
+
+						@endif
 			    	</div>
 				</div>
 			</div>
