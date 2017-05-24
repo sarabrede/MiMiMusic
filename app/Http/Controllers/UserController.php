@@ -59,7 +59,8 @@ class UserController extends Controller
             ->where('Usuario.contraseña', '=', $request->input('passwordInputlog'));
         })
         ->first();
-        session(['idUser' => $usuario->idUsuario, 'nombreUsuario' => $usuario->nombreUsuario]);
+        session(['idUser' => $usuario->idUsuario, 'nombreUsuario' => $usuario->nombreUsuario, 
+            'fotoUser' => $usuario->fotoPerfil]);
 
         return redirect('index');
     }
