@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title> MiMiMusic - @yield('title')</title>
+		<link rel="icon" type="image/png" href="{{ asset('images/favicon.ico') }}" />
 
 		<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" >
 		<link href="{{ asset('css/MimiMusicCSS.css') }}" rel="stylesheet" type="text/css" >
