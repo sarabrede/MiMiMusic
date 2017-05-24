@@ -26,3 +26,5 @@ Route::get('/song/{idSong}', 'SongController@getSong');
 Route::get('/album/{idAlbum}', 'AlbumController@getSong');
 
 Route::post('/addUser', 'UserController@addUser');
+
+Route::post('/logIn', 'UserController@logIn');
