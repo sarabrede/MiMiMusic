@@ -22,6 +22,11 @@ html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body,
 }*/
 
 
+.profilePhotoNavBar, .profilePhotoNavBar ul > li, .profilePhotoNavBar ul
+{
+	height: 50px;
+}
+
 
 /*Botones Genéricos*/
 .btn
@@ -276,6 +281,9 @@ body
 	height: 100%;
 }
 
+
+
+
 /*Logo NavBar*/
 
 .logoNav
@@ -307,6 +315,13 @@ body
 .navbar-right .dropdown-header
 {
 	margin: 2vh 0vh 0vh;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, 
+.navbar-inverse .navbar-nav>.open>a:hover
+{
+	background-color: #505250;
+	color: #BCC1C0;
 }
 
 
@@ -371,6 +386,18 @@ body
     border: 5px inset rgb(249, 243, 242);
 }
 
+
+.logoutddmenu
+{
+	width: 10vw;
+}
+
+.logoutddmenu span
+{	
+	color: #D1F4E9;
+}
+
+
 .dropdown-menu input
 {
 	width: 90%;
@@ -409,6 +436,20 @@ body
 	padding: 0px;
 	margin: 0px;
 }
+
+
+.nav>li>a
+{
+	padding-left: 0px;
+}
+
+.colProfile
+{
+	padding-left: 10px;
+}
+
+
+
 
 /*Search Page*/
 
