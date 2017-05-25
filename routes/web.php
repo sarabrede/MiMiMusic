@@ -36,6 +36,4 @@ Route::post('/addUser', 'UserController@addUser');
 
 Route::post('/logIn', 'UserController@logIn');
 
-
-
-
+Route::post('/addSong', 'SongController@addSong');
