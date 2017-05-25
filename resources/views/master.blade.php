@@ -62,11 +62,12 @@
 		      				<img src="{{ asset('images/minilogo.png') }}" class="img-responsive logoNavSM"></a>
 		    			</div>
 	    			</div>
+
 	    			<div class="collapse navbar-collapse">
 		    			<div class="visible-sm visible-md visible-lg hidden-xs col-sm-6">
 					    	<ul class="nav navbar-nav">
 					       		<li> 
-							       	<form class="navbar-form navbar-left">
+							       	<form class="navbar-form navbar-left" action="{{ url('search') }}">
 					  					<div class="input-group searchForm">
 					    					<input type="text" class="form-control" placeholder="Search..." value="@section('searchParam')@show">
 											<div class="input-group-btn">
