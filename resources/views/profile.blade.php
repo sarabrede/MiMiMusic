@@ -12,30 +12,31 @@
 
 @section('content')
 <script type="text/javascript">
-	function uploadSong() {
-		alert('JEJ');
-	}
 	$(document).ready(function() {
-		dialog = $( "#dialog-form" ).dialog( {
-	    	autoOpen: false,
-	    	height: 400,
-	    	width: 350,
-	    	modal: true,
-	    	buttons: {
-	        	"Upload Song": uploadSong,
-	        	Cancel: function() {
-	        		dialog.dialog( "close" );
-	        	}
+		dialog = $( "#dialog-form" ).dialog({
+	    	open: function() {
+	    		//$( this ).find( "[type=submit]" ).hide();
 	    	},
 	    	close: function() {
-	        //form[ 0 ].reset();
-	        //allFields.removeClass( "ui-state-error" );
-			}
+		        //form[ 0 ].reset();
+		        //allFields.removeClass( "ui-state-error" );
+			},
+	    	autoOpen: false,
+	    	height: 400,
+	    	width: 500,
+	    	modal: true,
+	    	buttons: [
+	    	{
+	    		text: "Cancel",
+	            click: function() {
+	                $( this ).dialog( "close" );
+	            }
+	    	}]
 	    });
 	    form = dialog.find( "form" ).on( "submit", function( event ) {
-	    	event.preventDefault();
+	    	//event.preventDefault();
 	    	//hacer el upload
-	    	alert('usuario :O');
+	    	//dialog.submit();
 	    });
 	    $( "#btnUploadSong" ).button().on( "click", function() {
 	    	dialog.dialog( "open" );
@@ -157,8 +158,6 @@
 						@endcomponent
 					@endforeach
 					</div>
-
-					<button id="create-user">Create new user</button>
 				</div>
 			</div>
 		</div>
@@ -166,17 +165,47 @@
 </div>
 <div id="dialog-form" title="Upload a Song">
 	<p class="validateTips">All form fields are required.</p>
-  	<form>
+  	<form id="addSong" action="/addSong" method="POST" enctype="multipart/form-data">
     	<fieldset>
-      		<label for="name">Name</label>
-      		<input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
-      		<label for="email">Email</label>
-		    <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
-		    <label for="password">Password</label>
-		    <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
- 
+    		<input type="hidden" name="idUser" id="idUser" value="{{$info->idUsuario}}">
+    		{{ csrf_field() }}
+    		<table>
+    			<tr>
+		      		<td><label for="titleSong">Title: </label></td>
+		      		<td><input type="text" name="titleSong" id="titleSong" class="text ui-widget-content ui-corner-all"></td>
+	      		</tr>
+	      		<tr>
+	      			<td><label for="descSong">Description: </label></td>
+	      			<td><input type="text" name="descSong" id="descSong" class="text ui-widget-content ui-corner-all"></td>
+	      		</tr>
+	      		<tr>
+	      			<td><label for="fileSong">File: </label></td>
+	      			<td><label><input type="file" name="fileSong" id="fileSong" class=""></label></td>
+			    </tr>
+			    <tr>
+			    	<td><label for="albumSong">Album: </label></td>
+			    	<td>
+			    		<select name="albumSong" id="albumSong">
+			    			@foreach ($albums as $album)
+			    				<option value="{{ $album->idAlbum }}">{{ $album->tituloAlbum }}</option>
+			    			@endforeach
+			    		</select>
+			    	</td>
+			    </tr>
+			    <tr>
+			    	<td><label for="genreSong">Genre: </label></td>
+			    	<td>
+			    		<select name="genreSong" id="genreSong">
+			    			@foreach ($genres as $genre)
+			    				<option value="{{ $genre->idGenero }}">{{ $genre->nombreGenero }}</option>
+			    			@endforeach
+			    		</select>
+			    	</td>
+			    </tr>
+ 			</table>
       		<!-- Allow form submission with keyboard without duplicating the dialog button -->
-      		<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+      		<!--<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
+      		<button type="submit">Upload  Song</button>
     	</fieldset>
   	</form>
 </div>
