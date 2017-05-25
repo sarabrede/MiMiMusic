@@ -14,8 +14,13 @@
 Route::get('/', 'SongController@landingSongs');
 
 
-Route::get('index/newest', 'SongController@indexSongByNewest');
+Route::get('/rechargeLandingPage/{number}', 'SongController@landingPageRecharge');
+Route::get('/index', 'SongController@indexSongByPopularity');
+Route::get('/index/popularity/{number}', 'SongController@indexSongByPopularityAjax');
+Route::get('/index/subscribers/{idUser}/{number}', 'SongController@indexSongBySubscribers');
 /*Route::get('/index/{type?}/{idUser?}', 'SongController@indexSong');*/
+
+
 
 Route::get('/search/{type?}/{searchParam?}', 'SongController@searchSong');
 
@@ -31,6 +36,6 @@ Route::post('/addUser', 'UserController@addUser');
 
 Route::post('/logIn', 'UserController@logIn');
 
-Route::get('/rechargeLandingPage/{number}', 'SongController@landingPageRecharge');
+
 
 
