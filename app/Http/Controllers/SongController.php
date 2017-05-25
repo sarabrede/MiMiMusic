@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cancion;
 use DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class SongController extends Controller
 {
@@ -209,4 +212,39 @@ class SongController extends Controller
 
 		return response()->json($songs);
     }
+
+    public function addSong(Request $request)
+    {
+    	$cancion = new Cancion;
+    	$pathBase = 'http://127.0.0.1:8080/audios/';
+    	$archivo = $request->file('fileSong');
+    	$fileName = str_replace(" ", "_", $archivo->getClientOriginalName());
+    	$file = $request->file('fileSong')->storeAs('usersAudios', $fileName);
+    	$pathTrue = $pathBase.\Carbon\Carbon::now().$fileName;
+    	//$path = Storage::putFileAs('usersAudios', $request->file('fileSong'), $fileName);
+
+        $cancion->tituloCancion = $request->input('titleSong');
+        $cancion->descripcion = $request->input('descSong');
+        $cancion->rutaCancion = $file;
+        $cancion->idAlbum = $request->input('albumSong');
+        $cancion->idGenero = $request->input('genreSong');
+        $cancion->fechaPublicacion = \Carbon\Carbon::now();
+
+        //$contents = Storage::put('usersAudios', $archivo->path());
+
+        //$archivo = Input::file('fileSong');
+        //$fileData = file_get_contents($archivo->getRealPath());
+
+        //$move = File::move($file->getRealPath(), $pathTrue);
+        //$fileData = FILE::get($file->path());
+        //move_uploaded_file($fileData, $pathTrue);
+        //Storage::copy(FILE::get($file), $pathTrue);
+        //$cancion->save();
+        return view('kek', ['cancion' => $cancion, 'jej' => $archivo]);//.$request->input('idUser')
+    }
+
+    /*public function __invoke($id)
+    {
+        return view('user.profile', ['user' => User::findOrFail($id)]);
+    }*/
 }
