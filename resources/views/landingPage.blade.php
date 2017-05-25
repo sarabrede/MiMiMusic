@@ -77,7 +77,7 @@
 			</div>
 			<div class="col-sm-8 col-xs-12 imagePanel">
 				<div class="panel panel-default musicPanel" id="landingPanel">
-					<div class="panel-body">
+					<div class="panel-body landingPageSongs">
 						<form class="form-group">
 						  	<div class="input-group">
 						    	<input type="text" class="form-control" placeholder="Search..."/>
@@ -92,6 +92,9 @@
 							@component('amazingaudioplayer', ['id' => $song->idCancion, 'title' => $song->tituloCancion, 'author' => $song->nombreUsuario.' - ', 'album' => $song->tituloAlbum, 'description' => $song->descripcion, 'source' => $song->rutaCancion, 'image' => $song->fotoAlbum])
 							@endcomponent
 						@endforeach
+
+						
+
 					</div>
 				</div>
 			</div>
