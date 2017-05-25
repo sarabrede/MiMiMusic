@@ -13,8 +13,8 @@ class SongController extends Controller
 		->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
 		->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
 		->select('Cancion.*', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Usuario.nombreUsuario')
-		->orderby('fechaPublicacion', 'desc')
-		->limit(9)
+		->orderby('idCancion', 'desc')
+		->limit(6)
 		->get();
         return view('landingPage', ['songs' => $songs]);
     }
@@ -42,21 +42,26 @@ class SongController extends Controller
     	return view ('song', ['song' => $song, 'album' => $album, 'idSong' => $idSong, 'comments' => $comments]);
     }
 
-	public function indexSong($type = 'popularity', $idUser = 0)
+	public function indexSong($type = 'default', $idUser = 0)
 	{
 		switch($type)
 		{
+			case 'default':
+				$result = $this->indexSongByPopularity();
+				return view('index', ['songs' => $result]);
+
 			case 'popularity':
 				$result = $this->indexSongByPopularity();
 				break;
 			case 'newest':
-				$result = $this->indexSongByNewest();
+				$this->indexSongByNewest();
 				break;
+
 			case 'subscribers':
 				$result = $this->indexSongBySubscribers($idUser);
 				break;
 		}
-		return view('index', ['songs' => $result]);
+		
 	}
 
 	public function indexSongByPopularity()
@@ -67,7 +72,7 @@ class SongController extends Controller
 		->join('Genero', 'Genero.idGenero', '=', 'Cancion.idGenero')
 		->select('Cancion.*', 'Album.idAlbum', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Album.precio', 'Usuario.nombreUsuario', 'Usuario.idUsuario', 'Genero.nombreGenero')
 		->orderby('visitas', 'desc')
-		->limit(9)
+		->limit(6)
 		->get();
         return $songs;
     }
@@ -79,10 +84,11 @@ class SongController extends Controller
 		->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
 		->join('Genero', 'Genero.idGenero', '=', 'Cancion.idGenero')
 		->select('Cancion.*', 'Album.idAlbum', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Album.precio', 'Usuario.nombreUsuario', 'Usuario.idUsuario', 'Genero.nombreGenero')
-		->orderby('fechaPublicacion', 'asc')
-		->limit(9)
+		->orderby('idCancion', 'desc')
+		->limit(6)
 		->get();
-        return $songs;
+		
+       return response()->json($songs);
     }
 
     public function indexSongBySubscribers($id)
@@ -170,4 +176,20 @@ class SongController extends Controller
     {
         return view('user.profile', ['user' => User::findOrFail($id)]);
     }*/
+
+    public function landingPageRecharge($number)
+    {
+
+    	$number += 6;
+
+    	$songs = DB::table('Cancion')
+		->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
+		->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
+		->select('Cancion.*', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Usuario.nombreUsuario')
+		->orderby('idCancion', 'desc')
+		->limit($number)
+		->get();
+
+		return response()->json($songs);
+    }
 }
