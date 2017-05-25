@@ -78,7 +78,7 @@ var tipoPill = "popular";
 
     	 		 	$.ajax({
     	 		 	type: "GET",
-    	 		 	url: "/index/newest",
+    	 		 	url: "/rechargeLandingPage/0",
     	 		 	contentType: "application/json",
     	 		 	dataType: "json",
     	 		 	data:'_token = <?php echo csrf_token() ?>',
@@ -99,6 +99,66 @@ var tipoPill = "popular";
 					}
     	 		 });
         	 	}
+
+
+                if(tipoPill == "popular" && !recarga)
+                {
+                    recarga = true;
+
+                    $.ajax({
+                    type: "GET",
+                    url: "/index/popularity/0",
+                    contentType: "application/json",
+                    dataType: "json",
+                    data:'_token = <?php echo csrf_token() ?>',
+
+                    success: function(data)
+                    {
+                        var htmltoAppend = "";
+                        for(var i = 0; i < data.length; i++)
+                        {
+                             htmltoAppend += appendPlayer(data[i].nombreUsuario, data[i].tituloCancion, data[i].tituloAlbum, data[i].descripcion, data[i].fotoAlbum,data[i].rutaCancion);
+                        }
+
+                        console.log(htmltoAppend);
+                        $(".rowContent").html(htmltoAppend);
+
+                        initReproductor();
+                        recarga = false;
+                    }
+                    });
+                }
+
+                if(tipoPill == "suscripciones" && !recarga)
+                {
+                    recarga = true;
+
+                    var idUser = $("#idUserHidden").text();
+
+                    $.ajax({
+                    type: "GET",
+                    url: "/index/subscribers/" + idUser + "/0",
+                    contentType: "application/json",
+                    dataType: "json",
+                    data:'_token = <?php echo csrf_token() ?>',
+
+                    success: function(data)
+                    {
+                        var htmltoAppend = "";
+                        for(var i = 0; i < data.length; i++)
+                        {
+                             htmltoAppend += appendPlayer(data[i].nombreUsuario, data[i].tituloCancion, data[i].tituloAlbum, data[i].descripcion, data[i].fotoAlbum,data[i].rutaCancion);
+                        }
+
+                        console.log(htmltoAppend);
+                        $(".rowContent").html(htmltoAppend);
+
+                        initReproductor();
+                        recarga = false;
+                    }
+                    });
+                }
+
 			});
 
 			$("#IndexScrollPanel").scroll(function() {
@@ -133,6 +193,52 @@ var tipoPill = "popular";
 						}
         	 		 });
         	 		}
+
+                    if(tipoPill == "popular")
+                    {
+                     $.ajax({
+                        type: "GET",
+                        url: "/index/popularity/" + number,
+                        contentType: "application/json",
+                        dataType: "json",
+                        data:'_token = <?php echo csrf_token() ?>',
+
+                        success: function(data)
+                        {
+                            for(var i = number; i < data.length; i++)
+                            {
+                                var htmltoAppend = appendPlayer(data[i].nombreUsuario, data[i].tituloCancion, data[i].tituloAlbum, data[i].descripcion, data[i].fotoAlbum,data[i].rutaCancion);
+                                $(".rowContent").append(htmltoAppend);
+                            }
+
+                            initReproductor();
+                            recarga = false;
+                        }
+                     });
+                    }
+
+                     if(tipoPill == "suscripciones")
+                    {
+                     $.ajax({
+                        type: "GET",
+                        url: "/index/subscribers/" + idUser + "/" + number,
+                        contentType: "application/json",
+                        dataType: "json",
+                        data:'_token = <?php echo csrf_token() ?>',
+
+                        success: function(data)
+                        {
+                            for(var i = number; i < data.length; i++)
+                            {
+                                var htmltoAppend = appendPlayer(data[i].nombreUsuario, data[i].tituloCancion, data[i].tituloAlbum, data[i].descripcion, data[i].fotoAlbum,data[i].rutaCancion);
+                                $(".rowContent").append(htmltoAppend);
+                            }
+
+                            initReproductor();
+                            recarga = false;
+                        }
+                     });
+                    }
         	 	}
 			});
 
