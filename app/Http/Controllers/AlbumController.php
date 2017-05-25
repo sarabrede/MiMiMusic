@@ -42,4 +42,14 @@ class AlbumController extends Controller
 		->get();
     	return view ('song', ['song' => $song, 'album' => $album, 'idSong' => $idSong, 'comments' => $comments]);
 	}
+
+	public function getAlbums($user)
+	{
+		$albums = DB::table('Album')
+		->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
+		->select('Album.*')
+		->where('Usuario.idUsuario', '=', $user)
+		->get();
+		return $albums;
+	}
 }
