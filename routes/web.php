@@ -13,7 +13,9 @@
 
 Route::get('/', 'SongController@landingSongs');
 
-Route::get('/index/{type?}/{idUser?}', 'SongController@indexSong');
+
+Route::get('index/newest', 'SongController@indexSongByNewest');
+/*Route::get('/index/{type?}/{idUser?}', 'SongController@indexSong');*/
 
 Route::get('/search/{type?}/{searchParam?}', 'SongController@searchSong');
 
@@ -28,3 +30,7 @@ Route::get('/album/{idAlbum}', 'AlbumController@getSong');
 Route::post('/addUser', 'UserController@addUser');
 
 Route::post('/logIn', 'UserController@logIn');
+
+Route::get('/rechargeLandingPage/{number}', 'SongController@landingPageRecharge');
+
+
