@@ -42,7 +42,7 @@ class SongController extends Controller
     	return view ('song', ['song' => $song, 'album' => $album, 'idSong' => $idSong, 'comments' => $comments]);
     }
 
-	public function indexSong($type = 'default', $idUser = 0)
+	/*public function indexSong($type = 'default', $idUser = 0)
 	{
 		switch($type)
 		{
@@ -62,7 +62,7 @@ class SongController extends Controller
 				break;
 		}
 		
-	}
+	}*/
 
 	public function indexSongByPopularity()
     {
@@ -74,10 +74,26 @@ class SongController extends Controller
 		->orderby('visitas', 'desc')
 		->limit(6)
 		->get();
-        return $songs;
+        return view('index', ['songs' => $songs]);
     }
 
-    public function indexSongByNewest()
+    public function indexSongByPopularityAjax($number)
+    {
+    	$number += 6;
+
+		$songs = DB::table('Cancion')
+		->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
+		->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
+		->join('Genero', 'Genero.idGenero', '=', 'Cancion.idGenero')
+		->select('Cancion.*', 'Album.idAlbum', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Album.precio', 'Usuario.nombreUsuario', 'Usuario.idUsuario', 'Genero.nombreGenero')
+		->orderby('visitas', 'desc')
+		->limit($number)
+		->get();
+
+       return response()->json($songs);
+    }
+
+   /* public function indexSongByNewest()
     {
 		$songs = DB::table('Cancion')
 		->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
@@ -89,7 +105,7 @@ class SongController extends Controller
 		->get();
 		
        return response()->json($songs);
-    }
+    }*/
 
     public function indexSongBySubscribers($id)
     {
@@ -108,9 +124,10 @@ class SongController extends Controller
 		->select('Cancion.*', 'Album.idAlbum', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Album.precio', 'Usuario.nombreUsuario', 'Usuario.idUsuario', 'Genero.nombreGenero')
 		->whereIn('Usuario.idUsuario', $search)
 		->orderby('fechaPublicacion', 'asc')
-		->limit(9)
+		->limit(6)
 		->get();
-        return $songs;
+
+        return response()->json($songs);
     }
 
 	public function searchSong($type = 'song', $searchParam = '')
