@@ -343,7 +343,7 @@ body
 	background-color: #D1F4E9;
 }
 
-.nav-pills>li.active>a, .nav-pills>li.active>a:hover
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus
 {
 	background-color: rgb(80, 82, 80);
 }
