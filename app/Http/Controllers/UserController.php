@@ -6,48 +6,52 @@ use Illuminate\Http\Request;
 use App\Usuario;
 use DB;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\GenreController;
 
 class UserController extends Controller
 {
     public function profileUser($user)
     {
-		$info = DB::table('Usuario')
-		->join('Pais', 'Usuario.idPais', '=', 'Pais.idPais')
-		->select('Usuario.*', 'Pais.nombrePais')
-		->where('Usuario.idUsuario', '=', $user)
-		->first();
-		$songs = $this->songsUser($user);
-        return view('profile', ['info' => $info, 'songs' => $songs]);
+        $info = DB::table('Usuario')
+        ->join('Pais', 'Usuario.idPais', '=', 'Pais.idPais')
+        ->select('Usuario.*', 'Pais.nombrePais')
+        ->where('Usuario.idUsuario', '=', $user)
+        ->first();
+        $songs = $this->songsUser($user);
+        $albumC = new AlbumController;
+        $albums = $albumC->getAlbums($user);
+        $genreC = new GenreController;
+        $genres = $genreC->getGenres();
+        return view('profile', ['info' => $info, 'songs' => $songs, 'albums' => $albums, 'genres' => $genres]);
     }
 
     public function songsUser($user)
     {
-    	$songs = DB::table('Cancion')
-		->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
-		->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
-		->join('Genero', 'Genero.idGenero', '=', 'Cancion.idGenero')
-		->select('Cancion.*', 'Album.idAlbum', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Album.precio', 'Usuario.nombreUsuario', 'Usuario.idUsuario', 'Genero.nombreGenero')
-		->where('Usuario.idUsuario', '=', $user)
-		->orderby('fechaPublicacion', 'desc')
-		->limit(20)
-		->get();
+        $songs = DB::table('Cancion')
+        ->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
+        ->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
+        ->join('Genero', 'Genero.idGenero', '=', 'Cancion.idGenero')
+        ->select('Cancion.*', 'Album.idAlbum', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Album.precio', 'Usuario.nombreUsuario', 'Usuario.idUsuario', 'Genero.nombreGenero')
+        ->where('Usuario.idUsuario', '=', $user)
+        ->orderby('fechaPublicacion', 'desc')
+        ->limit(20)
+        ->get();
         return $songs;
     }
 
     public function addUser(Request $request) {
-    	$usuario = new Usuario;
+        $usuario = new Usuario;
 
-    	$usuario->correoElectronico = $request->input('emailInput');
-    	$usuario->nombreUsuario = $request->input('usernameInput');
-    	$usuario->contraseña = $request->input('passwordInput');
-    	$usuario->nombreCompleto = 'JEJ';
+        $usuario->correoElectronico = $request->input('emailInput');
+        $usuario->nombreUsuario = $request->input('usernameInput');
+        $usuario->contraseña = $request->input('passwordInput');
 
         $usuario->save();
         return redirect('index');
     }
 
-    public function logIn(Request $request){
-
+    public function logIn(Request $request) {
         $usuario = DB::table('Usuario')
         ->select('Usuario.*')
         ->where(function($query) use(&$request) {
@@ -59,9 +63,7 @@ class UserController extends Controller
             ->where('Usuario.contraseña', '=', $request->input('passwordInputlog'));
         })
         ->first();
-        session(['idUser' => $usuario->idUsuario, 'nombreUsuario' => $usuario->nombreUsuario, 
-            'fotoUser' => $usuario->fotoPerfil]);
-
+        session(['idUser' => $usuario->idUsuario, 'nombreUsuario' => $usuario->nombreUsuario, 'fotoUser' => $usuario->fotoPerfil]);
         return redirect('index');
     }
 
