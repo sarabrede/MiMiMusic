@@ -261,6 +261,98 @@ var tipoPill = "popular";
 
 	/*Song*/
 
+
+    /*Búsqueda*/
+
+    $(".SearchPills a").click(function(event) {
+        event.preventDefault();
+
+        $(".SearchPills a").each(function() {
+            $(this).removeClass("activePill");
+        });
+
+        $(this).addClass("activePill");
+
+        var busqueda = $("#searchParam").val();
+
+        /*var htmltoAppend = "<div class ='col-xs-3'> <button type='button'" + 
+        "class='btn btnFilter' style='width: 100%'> Filter <span class='caret'>" +
+        "</span> </button> </div>"; */
+
+        var htmltoAppend = "<p> Sorry, we didn't find anything. </p>";
+
+        if($(this).hasClass("songsSearch") && !recarga)
+        {
+            $.ajax({
+                type: "GET",
+                url: "/search/songs/" + busqueda,
+                contentType: "application/json",
+                dataType: "json",
+                data:'_token = <?php echo csrf_token() ?>',
+
+                success: function(data)
+                {
+                    for(var i = 0; i < data.length; i++)
+                    {
+                        htmltoAppend = appendSearchComponent(data[i].fotoAlbum, data[i].tituloCancion, data[i].tituloAlbum, data[i].nombreGenero, data[i].nombreUsuario, data[i].descripcion, data[i].precio, data[i].idCancion, data[i].idAlbum, data[i].idUsuario);
+                    }
+
+                    $(".SearchPanel").html(htmltoAppend);
+                    recarga = false;
+                }
+             });
+        }
+
+        else if($(this).hasClass("albumSearch") && !recarga)
+        {
+
+            $.ajax({
+                type: "GET",
+                url: "/search/albums/" + busqueda,
+                contentType: "application/json",
+                dataType: "json",
+                data:'_token = <?php echo csrf_token() ?>',
+
+                success: function(data)
+                {
+                    for(var i = 0; i < data.length; i++)
+                    {
+                        console.log(data[i]);
+                        htmltoAppend = appendSearchComponent(data[i].fotoAlbum, data[i].tituloCancion, data[i].tituloAlbum, data[i].nombreGenero, data[i].nombreUsuario, data[i].descripcion, data[i].precio, data[i].idCancion, data[i].idAlbum, data[i].idUsuario);
+                    }
+
+                    $(".SearchPanel").html(htmltoAppend);
+                    recarga = false;
+                }
+             });
+        }
+
+        else if($(this).hasClass("userSearch") && !recarga)
+        {
+
+            $.ajax({
+                type: "GET",
+                url: "/search/users/" + busqueda,
+                contentType: "application/json",
+                dataType: "json",
+                data:'_token = <?php echo csrf_token() ?>',
+
+                success: function(data)
+                {
+                    for(var i = 0; i < data.length; i++)
+                    {
+                        console.log(data[i]);
+                        htmltoAppend = appendSearchComponent(data[i].fotoAlbum, data[i].tituloCancion, data[i].tituloAlbum, data[i].nombreGenero, data[i].nombreUsuario, data[i].descripcion, data[i].precio, data[i].idCancion, data[i].idAlbum, data[i].idUsuario);
+                    }
+
+                    $(".SearchPanel").html(htmltoAppend);
+                    recarga = false;
+                }
+              });
+        }
+
+    });
+
 	
 });
 
@@ -283,6 +375,33 @@ function appendPlayer(nombreUsuario, tituloCancion, tituloAlbum, descripcion, fo
 	"</li> </ul> </div> </div> </div> </div>";
 
 	return htmltoAppend;
+}
+
+function appendSearchComponent(image, title, album, genre, author, description, price, idSong, idAlbum, idUsuario)
+{
+    var htmltoAppend = "<div class ='col-xs-11 SearchResult'>" +
+    "<div class='col-xs-4 imageFrame'>" + 
+    "<img src='" + image +"' width='100%' height='100%' class='img-rounded'/> </div>" +
+    "<div class='col-xs-5 infoResult'>" +
+    "<a href='/song/" + idSong +"' target='_blank'>" + title + "</a> <br>" +
+    "<a href='/album/" + idAlbum + "'target='_blank'>" + album + "</a> <br>" +
+    "<label>" + genre + "</label><br>" +
+    "<a href='/profile/" + idUsuario + "'target='_blank'>" + author + "</a> <p>" + description + "</p> </div>" +
+    "<div class='col-xs-2 infoResult pull-right text-center'>"+
+    "<p>";
+
+    if(price == 0)
+    {
+        htmltoAppend += "Free"; 
+    }
+    else
+    {
+        htmltoAppend += "$" + price;
+    }
+
+    htmltoAppend += "</p> </div> </div>";
+    return htmltoAppend;
+
 }
 
 
