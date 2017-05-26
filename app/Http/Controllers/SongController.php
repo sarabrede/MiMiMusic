@@ -24,6 +24,8 @@ class SongController extends Controller
 
     public function getSong($idSong)
     {
+    	DB::table('Cancion')->increment('visitas');
+
     	$song = DB::table('Cancion')
 		->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
 		->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
@@ -31,18 +33,35 @@ class SongController extends Controller
 		->select('Cancion.*', 'Album.idAlbum', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Album.precio', 'Usuario.nombreUsuario', 'Usuario.idUsuario', 'Genero.nombreGenero')
 		->where('Cancion.idCancion', '=', $idSong)
 		->first();
+
 		$idAlbum = $song->idAlbum;
 		$album = DB::table('Album')
 		->join('Cancion', 'Cancion.idAlbum', '=', 'Album.idAlbum')
 		->select('Cancion.*')
 		->where('Album.idAlbum', $idAlbum)
 		->get();
+
 		$comments = DB::table('UsuarioComentaCancion')
 		->join('Usuario', 'UsuarioComentaCancion.idUsuario', '=', 'Usuario.idUsuario')
 		->select('UsuarioComentaCancion.*', 'Usuario.nombreUsuario')
 		->where('idCancion', '=', $idSong)
+		->orderby('idComentario', 'desc')
 		->get();
-    	return view ('song', ['song' => $song, 'album' => $album, 'idSong' => $idSong, 'comments' => $comments]);
+
+		$idUser = session('idUser', 0);
+		$isfavorite = 0;
+
+		if($idUser != 0)
+		{
+			$isfavorite	= DB::table('UsuarioCancionFavorita')
+			->select('UsuarioCancionFavorita.*')
+			->where([
+				['idUsuario', '=', $idUser],
+				['idCancion', '=', $idSong ],
+			])->count();
+		}
+
+    	return view ('song', ['song' => $song, 'album' => $album, 'idSong' => $idSong, 'comments' => $comments, 'isfavorite' => $isfavorite]);
     }
 
 	/*public function indexSong($type = 'default', $idUser = 0)
@@ -260,6 +279,25 @@ class SongController extends Controller
         //Storage::copy(FILE::get($file), $pathTrue);
         //$cancion->save();
         return view('kek', ['cancion' => $cancion, 'jej' => $archivo]);//.$request->input('idUser')
+    }
+
+    public function addFavorite($idSong)
+    {
+    	DB::table('UsuarioCancionFavorita')->insert([
+    		'idUsuario' => $idUser = session('idUser'),
+    		'idCancion' => $idSong
+    		]);
+    }
+
+    public function deleteFavorite($idSong)
+    {
+    	$idUser = session('idUser');
+    	DB::table('UsuarioCancionFavorita')
+    	->where([
+				['idUsuario', '=', $idUser],
+				['idCancion', '=', $idSong ],
+			])->delete();
+
     }
 
     /*public function __invoke($id)
