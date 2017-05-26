@@ -15,6 +15,7 @@ $nombreUsuario = session('nombreUsuario', 'default');
 @section('content')
 
 <input type="hidden" id="idSongPage" value="{{ $song->idCancion }}" />
+<input type="hidden" id="priceSongPage" value="{{ $song->precio }}" />
 
 <div class="container">
 	<div class="panel panel-default musicPanel contenido">
@@ -29,9 +30,12 @@ $nombreUsuario = session('nombreUsuario', 'default');
 							</div>
 
 							@if( strcmp($nombreUsuario, "default") != 0)
-							<button type="button" class="btn btnSong btnBuy">
-          						<span class="glyphicon glyphicon-shopping-cart"></span>
-        					</button>
+
+								@if($song->precio != 0.00)
+									<button type="button" class="btn btnSong btnBuy">
+		          						<span class="glyphicon glyphicon-shopping-cart"></span>
+		        					</button>
+		        				@endif
 								
 								@if($isfavorite == 0)
 									<button type="button" class="btn btnSong btnLove">
@@ -61,7 +65,7 @@ $nombreUsuario = session('nombreUsuario', 'default');
 
 				<div class="col-xs-11 reproductorColumn">
 					<div class="col-xs-7 reproductor">
-						<audio controls class="audioHtml">
+						<audio controls class="audioHtml" id="audioSongPlayer">
 						  <source src="{{ $song->rutaCancion }}" type="audio/mp3">
 						</audio>
 					</div>
