@@ -25,7 +25,6 @@
 		<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 		{{--Amazing AudioPlayer --}}
-		
 		<script type="text/javascript" src="{{ asset('audioplayerengine/amazingaudioplayer.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('audioplayerengine/initaudioplayer.js') }}"></script>
 
@@ -69,12 +68,15 @@
 					       		<li> 
 							       	<form class="navbar-form navbar-left" action="{{ url('search') }}">
 					  					<div class="input-group searchForm">
-					    					<input type="text" class="form-control" placeholder="Search..." value="@section('searchParam')@show">
+
+					    					<input type="text" class="form-control" placeholder="Search..." value="@section('searchParam')@show" name="searchParam" id="searchParam" />
+
 											<div class="input-group-btn">
 					  							<button class="btn btn-default" type="submit">
 					    							<i class="glyphicon glyphicon-search"></i>
 					  							</button>
 											</div>
+
 					  					</div>
 									</form>
 					    		<li>
