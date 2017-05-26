@@ -288,7 +288,23 @@ var tipoPill = "popular";
 
             $(this).addClass("btnUsed"); 
         }
+    });
 
+    $(".btnBuy").click(function() {
+        
+        if(!$(this).hasClass("btnUsed"))
+        {
+            var id = $("#idSongPage").val();
+            $.ajax({
+            type: "GET",
+            url: "/song/" + id +"/addToCart",
+            contentType: "application/json",
+            dataType: "json",
+            data:'_token = <?php echo csrf_token() ?>'
+            });
+
+            $(this).addClass("btnUsed");
+        }
         
     });
 
@@ -327,6 +343,21 @@ var tipoPill = "popular";
                 $("#taComment").val("");
             }
         });
+    });
+
+    var audio = document.getElementById("audioSongPlayer");
+    audio.addEventListener("timeupdate", function() {
+
+        var price = $("#priceSongPage").val();
+
+        if(price != 0)
+        {
+            if(audio.currentTime >= 30)
+            {
+                audio.currentTime = 0;
+            }
+        }
+
     });
 
 
