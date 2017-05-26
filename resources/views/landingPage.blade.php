@@ -78,11 +78,11 @@
 			<div class="col-sm-8 col-xs-12 imagePanel">
 				<div class="panel panel-default musicPanel" id="landingPanel">
 					<div class="panel-body landingPageSongs">
-						<form class="form-group">
+						<form class="form-group" action="{{ url('search') }}">
 						  	<div class="input-group">
-						    	<input type="text" class="form-control" placeholder="Search..."/>
+						    	<input type="text" class="form-control" placeholder="Search..." name="searchParam"/>
 						    	<div class="input-group-btn">
-						        	<button class="btn btn-default" type="button">
+						        	<button class="btn btn-default" type="submit">
 							    		<i class="glyphicon glyphicon-search"></i>
 							    	</button>
 								</div>
