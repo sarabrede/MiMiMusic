@@ -22,7 +22,13 @@ Route::get('/index/subscribers/{idUser}/{number}', 'SongController@indexSongBySu
 
 
 
-Route::get('/search/{type?}/{searchParam?}', 'SongController@searchSong');
+/*Route::get('/search/{type?}/{searchParam?}', 'SongController@searchSong');*/
+
+Route::get('/search', 'SongController@searchSongByTitle');
+Route::get('/search/songs/{titulo}', 'SongController@searchSongByTitleAjax');
+Route::get('/search/albums/{titulo}', 'SongController@searchSongByAlbum');
+Route::get('/search/users/{usuario}', 'SongController@searchSongByUser');
+
 
 Route::get('/shop', 'AlbumController@shopAlbum');
 
