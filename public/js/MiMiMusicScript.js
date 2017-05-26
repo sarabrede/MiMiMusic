@@ -261,6 +261,74 @@ var tipoPill = "popular";
 
 	/*Song*/
 
+    $(".btnLove").click(function() {
+        var id = $("#idSongPage").val();
+
+        if($(this).hasClass("btnUsed"))
+        {
+            $.ajax({
+            type: "GET",
+            url: "/song/" + id +"/deletefavorite",
+            contentType: "application/json",
+            dataType: "json",
+            data:'_token = <?php echo csrf_token() ?>'
+            });
+
+            $(this).removeClass("btnUsed"); 
+        }
+        else
+        {
+           $.ajax({
+            type: "GET",
+            url: "/song/" + id +"/favorite",
+            contentType: "application/json",
+            dataType: "json",
+            data:'_token = <?php echo csrf_token() ?>'
+            });
+
+            $(this).addClass("btnUsed"); 
+        }
+
+        
+    });
+
+    $("#btnComment").click(function() {
+        var id = $("#idSongPage").val();
+        var comment = $("#taComment").val();
+
+        $.ajax({
+            type: "GET",
+            url: "/song/comment/" + id +"/" + comment,
+            contentType: "application/json",
+            dataType: "json",
+            data:'_token = <?php echo csrf_token() ?>',
+            success: function(data)
+            {
+                var htmltoAppend = "<div class='col-xs-12 comment'>" +
+                "<div class='col-xs-2'>" + "<img src='../images/defaultUser.png' width='100%' " +
+                "height='100%' class='img-circle'/>" + "</div> <div class='col-xs-7'>" + 
+                "<a href=/profile/" + data[0].idUsuario + "' target='_blank'>" +
+                data[0].nombreUsuario + "</a> <p>" + data[0].comentario + "</p> </div>" +
+                "<div class='col-xs-2 text-right dateOfComment'> <p> " +
+                data[0].fechaComentario + "</p> </div> </div>" +
+                "<div class='col-xs-12 lineParent'> <div class='col-xs-2'>" +
+                "</div> <div class='col-xs-8 line'> </div> </div>";
+
+                var cuenta = $(".comment").length;
+                if(cuenta == 0)
+                {
+                    $(".commentPanel").append(htmltoAppend);
+                }
+                else
+                {
+                    $(".comment").eq(0).before(htmltoAppend);
+                }
+
+                $("#taComment").val("");
+            }
+        });
+    });
+
 
     /*Búsqueda*/
 
@@ -279,7 +347,8 @@ var tipoPill = "popular";
         "class='btn btnFilter' style='width: 100%'> Filter <span class='caret'>" +
         "</span> </button> </div>"; */
 
-        var htmltoAppend = "<p> Sorry, we didn't find anything. </p>";
+        var htmltoAppend = "";
+        var error = "<p> Sorry, we didn't find anything. </p>";
 
         if($(this).hasClass("songsSearch") && !recarga)
         {
@@ -294,7 +363,12 @@ var tipoPill = "popular";
                 {
                     for(var i = 0; i < data.length; i++)
                     {
-                        htmltoAppend = appendSearchComponent(data[i].fotoAlbum, data[i].tituloCancion, data[i].tituloAlbum, data[i].nombreGenero, data[i].nombreUsuario, data[i].descripcion, data[i].precio, data[i].idCancion, data[i].idAlbum, data[i].idUsuario);
+                        htmltoAppend += appendSearchComponent(data[i].fotoAlbum, data[i].tituloCancion, data[i].tituloAlbum, data[i].nombreGenero, data[i].nombreUsuario, data[i].descripcion, data[i].precio, data[i].idCancion, data[i].idAlbum, data[i].idUsuario);
+                    }
+
+                    if(htmltoAppend === "")
+                    {
+                        htmltoAppend = error;
                     }
 
                     $(".SearchPanel").html(htmltoAppend);
@@ -317,9 +391,14 @@ var tipoPill = "popular";
                 {
                     for(var i = 0; i < data.length; i++)
                     {
-                        console.log(data[i]);
-                        htmltoAppend = appendSearchComponent(data[i].fotoAlbum, data[i].tituloCancion, data[i].tituloAlbum, data[i].nombreGenero, data[i].nombreUsuario, data[i].descripcion, data[i].precio, data[i].idCancion, data[i].idAlbum, data[i].idUsuario);
+                        htmltoAppend += appendSearchComponent(data[i].fotoAlbum, data[i].tituloCancion, data[i].tituloAlbum, data[i].nombreGenero, data[i].nombreUsuario, data[i].descripcion, data[i].precio, data[i].idCancion, data[i].idAlbum, data[i].idUsuario);
                     }
+
+                    if(htmltoAppend === "")
+                    {
+                        htmltoAppend = error;
+                    }
+
 
                     $(".SearchPanel").html(htmltoAppend);
                     recarga = false;
@@ -341,9 +420,14 @@ var tipoPill = "popular";
                 {
                     for(var i = 0; i < data.length; i++)
                     {
-                        console.log(data[i]);
-                        htmltoAppend = appendSearchComponent(data[i].fotoAlbum, data[i].tituloCancion, data[i].tituloAlbum, data[i].nombreGenero, data[i].nombreUsuario, data[i].descripcion, data[i].precio, data[i].idCancion, data[i].idAlbum, data[i].idUsuario);
+                        htmltoAppend += appendSearchComponent(data[i].fotoAlbum, data[i].tituloCancion, data[i].tituloAlbum, data[i].nombreGenero, data[i].nombreUsuario, data[i].descripcion, data[i].precio, data[i].idCancion, data[i].idAlbum, data[i].idUsuario);
                     }
+
+                    if(htmltoAppend === "")
+                    {
+                        htmltoAppend = error;
+                    }
+
 
                     $(".SearchPanel").html(htmltoAppend);
                     recarga = false;
