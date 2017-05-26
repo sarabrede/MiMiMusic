@@ -1018,7 +1018,7 @@ body
 	margin: auto;
 }
 
-.btnSong
+.btnSong, .btnSong:focus
 {
 	position: absolute;
 	background-color: #505250;
@@ -1032,7 +1032,7 @@ body
 	top: 4%;
 }
 
-.btnSong:hover
+.btnSong:hover, .btnUsed, .btnUsed:focus
 {
 	opacity: 1.0;
 	color: #76CCB1;
