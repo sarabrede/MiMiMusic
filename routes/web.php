@@ -38,6 +38,7 @@ Route::get('/song/{idSong}', 'SongController@getSong');
 Route::get('/song/{idSong}/favorite', 'SongController@addFavorite');
 Route::get('/song/{idSong}/deletefavorite', 'SongController@deleteFavorite');
 Route::get('/song/comment/{idSong}/{comentario}', 'CommentController@addComment');
+Route::get('/song/{idSong}/addToCart', 'SongController@addToCart');
 
 
 Route::get('/album/{idAlbum}', 'AlbumController@getSong');
