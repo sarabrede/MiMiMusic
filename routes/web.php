@@ -35,6 +35,10 @@ Route::get('/shop', 'AlbumController@shopAlbum');
 Route::get('/profile/{userProfile}', 'UserController@profileUser');
 
 Route::get('/song/{idSong}', 'SongController@getSong');
+Route::get('/song/{idSong}/favorite', 'SongController@addFavorite');
+Route::get('/song/{idSong}/deletefavorite', 'SongController@deleteFavorite');
+Route::get('/song/comment/{idSong}/{comentario}', 'CommentController@addComment');
+
 
 Route::get('/album/{idAlbum}', 'AlbumController@getSong');
 
