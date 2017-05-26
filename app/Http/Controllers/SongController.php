@@ -300,6 +300,13 @@ class SongController extends Controller
 
     }
 
+    public function addToCart($idSong, Request $request)
+    {
+    	$collection = collect
+
+    	$request->session()->push('Cart', $idSong);
+    }
+
     /*public function __invoke($id)
     {
         return view('user.profile', ['user' => User::findOrFail($id)]);
