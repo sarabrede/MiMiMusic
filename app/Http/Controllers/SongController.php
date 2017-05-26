@@ -133,7 +133,7 @@ class SongController extends Controller
         return response()->json($songs);
     }
 
-	public function searchSong($type = 'song', $searchParam = '')
+	/*public function searchSong($type = 'song', $searchParam = '')
 	{
 		switch($type)
 		{
@@ -147,21 +147,39 @@ class SongController extends Controller
 				$result = $this->searchSongByUser($searchParam);
 				break;
 		}
-		return view('search', ['songs' => $result, 'search' =>$searchParam]);
-	}
+		
+	}*/
 
-    public function searchSongByTitle($title)
+    public function searchSongByTitle(Request $request)
     {
-    	$songs = DB::table('Cancion')
+    	$titulo = $request->input('searchParam');
+		
+		$songs = DB::table('Cancion')
 		->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
 		->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
 		->join('Genero', 'Genero.idGenero', '=', 'Cancion.idGenero')
 		->select('Cancion.*', 'Album.idAlbum', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Album.precio', 'Usuario.nombreUsuario', 'Usuario.idUsuario', 'Genero.nombreGenero')
-		->where('Cancion.tituloCancion', 'like', '%'.$title.'%')
+		->where('Cancion.tituloCancion', 'like', '%'.$titulo.'%')
 		->orderby('fechaPublicacion', 'desc')
 		->limit(20)
 		->get();
-        return $songs;
+
+       return view('search', ['songs' => $songs, 'search' => $titulo]);
+    }
+
+    public function searchSongByTitleAjax($titulo)
+    {	
+		$songs = DB::table('Cancion')
+		->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
+		->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
+		->join('Genero', 'Genero.idGenero', '=', 'Cancion.idGenero')
+		->select('Cancion.*', 'Album.idAlbum', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Album.precio', 'Usuario.nombreUsuario', 'Usuario.idUsuario', 'Genero.nombreGenero')
+		->where('Cancion.tituloCancion', 'like', '%'.$titulo.'%')
+		->orderby('fechaPublicacion', 'desc')
+		->limit(20)
+		->get();
+
+      	 return response()->json($songs);
     }
 
     public function searchSongByAlbum($album)
@@ -175,7 +193,8 @@ class SongController extends Controller
 		->orderby('fechaPublicacion', 'desc')
 		->limit(20)
 		->get();
-        return $songs;
+        
+        return response()->json($songs);
     }
 
     public function searchSongByUser($user)
@@ -189,7 +208,7 @@ class SongController extends Controller
 		->orderby('fechaPublicacion', 'desc')
 		->limit(20)
 		->get();
-        return $songs;
+       return response()->json($songs);
     }
 
     /*public function __invoke($id)
