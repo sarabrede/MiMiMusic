@@ -6,6 +6,13 @@ var tipoPill = "popular";
 	/*Poner el scrollbar a la lista de canciones*/
 		$(".prfctScrollBar").perfectScrollbar();
 
+        $(".amazingaudioplayer-title").on( "click", function( event ) {
+            var id = $(this).parent().parent().prev().val();
+            window.location.href = '/song/' + id;
+     });
+
+
+
 	/*Landing Page*/ 
 		$("#newHere").click(function() {
 			$(".formLogIn").fadeOut("slow", function()
@@ -24,6 +31,75 @@ var tipoPill = "popular";
 					$(".formLogIn").fadeIn("slow");
 				});
 		});
+
+        $(".emailCheck").blur(function() {
+
+            var email = $(this).val();
+            var who = $(this);
+
+           $.ajax({
+                type: "GET",
+                url: "/emailUsed/" + email,
+                contentType: "application/json",
+                dataType: "json",
+                data:'_token = <?php echo csrf_token() ?>',
+
+                success: function(data)
+                {
+                   if(data == 1)
+                   {
+                        who.addClass("error");
+                   }
+                   else
+                   {
+                    who.removeClass("error");
+                   }
+                }
+             });
+        });
+
+        $(".usernameCheck").blur(function() {
+            var username = $(this).val();
+            var who = $(this);
+
+           $.ajax({
+                type: "GET",
+                url: "/usernameUsed/" + username,
+                contentType: "application/json",
+                dataType: "json",
+                data:'_token = <?php echo csrf_token() ?>',
+
+                success: function(data)
+                {
+                   if(data == 1)
+                   {
+                        who.addClass("error");
+                   }
+
+                   else
+                   {
+                    who.removeClass("error");
+                   }
+                }
+             });
+
+        });
+
+        $("#btnSignUpLanding").click(function() {
+            var errorvalidacion = false;
+            $("#formSignUpLanding .form-control").each(function() {
+                if($(this).hasClass("error") || $(this).val() == "")
+                {
+                    errorvalidacion = true;
+                }
+            });
+
+            if(!errorvalidacion)
+            {
+                $("#formSignUpLanding").submit();
+            }
+
+        });
 
 		/*Detectar si es el final del contenedor*/
 			$("#landingPanel").scroll(function() {
