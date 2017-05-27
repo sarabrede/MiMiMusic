@@ -22,7 +22,7 @@ html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body,
 }*/
 
 
-.profilePhotoNavBar, .profilePhotoNavBar ul > li, .profilePhotoNavBar ul
+.profilePhotoNavBar, .profilePhotoNavBar > ul > li, .profilePhotoNavBar > ul
 {
 	height: 50px;
 }
