@@ -18,10 +18,10 @@ class CreateTableTransaccion extends Migration
             $table->float('totalVenta');
             $table->timestamp('fechaCompra');
             $table->integer('idUsuario')->unsigned();
-            $table->integer('idTarjeta')->unsigned();
+            //$table->integer('idTarjeta')->unsigned();
 
             $table->foreign('idUsuario')->references('idUsuario')->on('Usuario');
-            $table->foreign('idTarjeta')->references('idTarjeta')->on('Tarjeta');
+            //$table->foreign('idTarjeta')->references('idTarjeta')->on('Tarjeta');
         });
     }
 
