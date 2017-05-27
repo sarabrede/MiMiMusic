@@ -4,13 +4,13 @@
 	</div>
 				
 	<div class="col-xs-5 infoResult">
-		<a href="{{ url('song') }}/{{ $id }}" target="_blank"> {{ $title }} </a> 
+		<a href="{{ url('song') }}/{{ $id }}"> {{ $title }} </a> 
 		<br>
-		<a href="{{ url('album') }}/{{ $idAlbum }}" target="_blank"> {{ $album }} </a>
+		<a href="{{ url('album') }}/{{ $idAlbum }}"> {{ $album }} </a>
 		<br>
 		<label>{{ $genre }}</label>
 		<br>
-		<a href="{{ url('profile') }}/{{ $idUser }}" target="_blank"> {{ $author }} </a>
+		<a href="{{ url('profile') }}/{{ $idUser }}"> {{ $author }} </a>
 		<p> {{ $description }} </p>
 	</div>
 	<div class="col-xs-2 infoResult pull-right text-center">
