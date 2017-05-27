@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Usuario;
 use DB;
+use Storage;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\GenreController;
@@ -23,7 +24,9 @@ class UserController extends Controller
         $albums = $albumC->getAlbums($user);
         $genreC = new GenreController;
         $genres = $genreC->getGenres();
-        return view('profile', ['info' => $info, 'songs' => $songs, 'albums' => $albums, 'genres' => $genres]);
+        $countryC = new CountryController;
+        $countries = $countryC->getCountries();
+        return view('profile', ['info' => $info, 'songs' => $songs, 'albums' => $albums, 'genres' => $genres, 'countries' => $countries]);
     }
 
     public function songsUser($user)
@@ -32,7 +35,7 @@ class UserController extends Controller
         ->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
         ->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
         ->join('Genero', 'Genero.idGenero', '=', 'Cancion.idGenero')
-        ->select('Cancion.*', 'Album.idAlbum', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Album.precio', 'Usuario.nombreUsuario', 'Usuario.idUsuario', 'Genero.nombreGenero')
+        ->select('Cancion.*', 'Album.idAlbum', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Album.precio', 'Usuario.nombreUsuario', 'Usuario.idUsuario', 'Genero.*')
         ->where('Usuario.idUsuario', '=', $user)
         ->orderby('fechaPublicacion', 'desc')
         ->limit(20)
@@ -65,6 +68,62 @@ class UserController extends Controller
         ->first();
         session(['idUser' => $usuario->idUsuario, 'nombreUsuario' => $usuario->nombreUsuario, 'fotoUser' => $usuario->fotoPerfil]);
         return redirect('index');
+    }
+
+    public function logOut(Request $request)
+    {
+        $request->session()->flush();
+        return redirect('/');
+    }
+
+    public function editUser(Request $request)
+    {
+        $idUser = $request->input('idUser');
+        $usuario = Usuario::where('idUsuario', '=', $idUser)->first();
+        $usuario->nombreCompleto = $request->input('nombreCompleto');
+        $usuario->contraseña = $request->input('contraseña');
+        $usuario->idPais = $request->input('countryUser');
+        $usuario->save();
+        return redirect('profile/'.$idUser);
+    }
+
+    public function editProfilePicture(Request $request)
+    {
+        $archivo = $request->file('fileFoto');
+        $fileName = str_replace(" ", "_", $archivo->getClientOriginalName());
+        $idUser = session('idUser');
+        $realFileName = $idUser.rand().$fileName;
+
+        $request->file('fileFoto')->move(public_path("/audioImages"), $realFileName);
+
+        $trueFile = "../audioImages/".$realFileName;
+
+        $usuario = Usuario::where('idUsuario', '=', $idUser)->first();
+        $usuario->fotoPerfil = $trueFile;
+        $usuario->save();
+
+        $request->session()->forget('fotoUser');
+        session(['fotoUser' => $usuario->fotoPerfil]);
+
+        return redirect('/profile/'.$idUser);
+    }
+
+    public function editCoverPicture(Request $request)
+    {
+        $archivo = $request->file('fileCover');
+        $fileName = str_replace(" ", "_", $archivo->getClientOriginalName());
+        $idUser = session('idUser');
+        $realFileName = $idUser.rand().$fileName;
+
+        $request->file('fileCover')->move(public_path("/audioImages"), $realFileName);
+
+        $trueFile = "../audioImages/".$realFileName;
+
+        $usuario = Usuario::where('idUsuario', '=', $idUser)->first();
+        $usuario->fotoBanner = $trueFile;
+        $usuario->save();
+        
+        return redirect('/profile/'.$idUser);
     }
 
 }
