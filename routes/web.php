@@ -46,6 +46,8 @@ Route::post('/addUser', 'UserController@addUser');
 Route::post('/editUser', 'UserController@editUser');
 Route::post('/editProfilePicture', 'UserController@editProfilePicture');
 Route::post('/editCoverPicture', 'UserController@editCoverPicture');
+Route::get('/emailUsed/{email}', 'UserController@checkmail');
+Route::get('/usernameUsed/{username}' , 'UserController@checkusername');
 
 Route::post('/logIn', 'UserController@logIn');
 Route::get('/logOut', 'UserController@logOut');
