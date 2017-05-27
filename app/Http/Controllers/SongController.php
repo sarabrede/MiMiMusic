@@ -20,7 +20,7 @@ class SongController extends Controller
 		->orderby('idCancion', 'desc')
 		->limit(6)
 		->get();
-        return view('landingPage', ['songs' => $songs]);
+        return view('landingPage', ['songs' => $songs, 'error' => 'no']);
     }
 
     public function getSong($idSong)
@@ -44,7 +44,7 @@ class SongController extends Controller
 
 		$comments = DB::table('UsuarioComentaCancion')
 		->join('Usuario', 'UsuarioComentaCancion.idUsuario', '=', 'Usuario.idUsuario')
-		->select('UsuarioComentaCancion.*', 'Usuario.nombreUsuario')
+		->select('UsuarioComentaCancion.*', 'Usuario.*')
 		->where('idCancion', '=', $idSong)
 		->orderby('idComentario', 'desc')
 		->get();
@@ -302,6 +302,7 @@ class SongController extends Controller
     	$songs = explode(',', $idSongs);
     	foreach ($songs as $song) {
     		$cancion = Cancion::where('idCancion', '=', $song)->first();
+    		
     		$cancion->delete();
     	}
     	return redirect('profile/'.$idUser);
