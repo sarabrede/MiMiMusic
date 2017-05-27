@@ -33,13 +33,63 @@
 	            }
 	    	}]
 	    });
-	    form = dialog.find( "form" ).on( "submit", function( event ) {
-	    	//event.preventDefault();
-	    	//hacer el upload
-	    	//dialog.submit();
+	    dialogAlbum = $( "#dialog-formAlbum" ).dialog({
+	    	open: function() {
+	    		//$( this ).find( "[type=submit]" ).hide();
+	    	},
+	    	close: function() {
+		        //form[ 0 ].reset();
+		        //allFields.removeClass( "ui-state-error" );
+			},
+	    	autoOpen: false,
+	    	height: 400,
+	    	width: 500,
+	    	modal: true,
+	    	buttons: [
+	    	{
+	    		text: "Cancel",
+	            click: function() {
+	                $( this ).dialog( "close" );
+	            }
+	    	}]
+	    });
+	    dialogUser = $( "#dialog-formEdit" ).dialog({
+	    	open: function() {
+	    		//$( this ).find( "[type=submit]" ).hide();
+	    	},
+	    	close: function() {
+		        //form[ 0 ].reset();
+		        //allFields.removeClass( "ui-state-error" );
+			},
+	    	autoOpen: false,
+	    	height: 400,
+	    	width: 500,
+	    	modal: true,
+	    	buttons: [
+	    	{
+	    		text: "Cancel",
+	            click: function() {
+	                $( this ).dialog( "close" );
+	            }
+	    	}]
+	    });
+	    $( "#btnEditUser" ).button().on( "click", function() {
+	    	dialogUser.dialog( "open" );
 	    });
 	    $( "#btnUploadSong" ).button().on( "click", function() {
 	    	dialog.dialog( "open" );
+	    });
+	    $("#btnDeleteSong").button().on("click", function(){
+	    	var ids = [];
+	    	$(".deletDis:checked").each(function(){
+	    		ids.push($(this).attr( 'idSong' ));
+	    	});
+	    	var idSongs = ids.toString();
+	    	if (idSongs != "")
+	    		window.location.href = "http://localhost:8000/deleteSongs/"+idSongs+"/"+{{$info->idUsuario}};
+	    });
+	    $( "#btnAddAlbum" ).button().on( "click", function() {
+	    	dialogAlbum.dialog( "open" );
 	    });
 	});
 </script>
@@ -48,19 +98,28 @@
 		<div class="panel-body">
 			<div class="row Profile">
 				<div class="col-xs-12 bannerPhoto img-rounded">
-					<img src = "../images/defaultBanner.jpg" width="100%" height="100%"/>
+					<img src = "{{ $info->fotoBanner }}" width="100%" height="100%"/>
 
 					<div class="col-xs-3 profilePicture">
-						<img src = "../images/defaultUser.png" width="100%" height="100%" class="img-circle"/>
+						<img src = "{{ $info->fotoPerfil }}" width="100%" height="100%" class="img-circle"/>
 						<div class="col-xs-4 inputPhotoProfile">
-							<input accept=".jpg" type="file" name="filecamera" id="filecamera" class="filecamera" accept="image/*"/>
-							<label for="filecamera" class="labelcamera"> <span class="glyphicon glyphicon-camera"></span></label>
+							<form action="/editProfilePicture" method="post" enctype="multipart/form-data" id="ProfilePhotoForm">
+								{{ csrf_field() }}
+								<input accept=".jpg" type="file" name="fileFoto" id="ProfilePhoto" class="filecamera" accept="image/*"/>
+								<label for="ProfilePhoto" class="labelcamera"> <span class="glyphicon glyphicon-camera"></span></label>
+								<input type="hidden" value="profile"/>
+							</form>
 						</div>
 					</div>
 
 					<div class="col-xs-1 inputPhotoBanner">
-						<input accept=".jpg" type="file" name="filecamera" id="filecamera" class="filecamera" accept="image/*"/>
-						<label for="filecamera" class="labelcamera"> <span class="glyphicon glyphicon-camera"></span></label>
+
+						<form action="/editCoverPicture" method="post" enctype="multipart/form-data" id="BannerPhotoForm">
+							{{ csrf_field() }}
+							<input accept=".jpg" type="file" name="fileCover" id="filecamera" class="filecamera" accept="image/*"/>
+							<label for="filecamera" class="labelcamera"> <span class="glyphicon glyphicon-camera"></span></label>
+						</form>
+
 					</div>
 				</div>
 
@@ -107,20 +166,24 @@
 						<div class="col-xs-4">
 						</div>
 
-						<div class="col-xs-4">
+						<div class="col-xs-8">
 							<button type="button" class="btn" id="btnUploadSong">
 	         					<span class="glyphicon glyphicon-upload"></span> Upload Song
 	        				</button>
 
-	        				<button type="button" class="btn">
+	        				<button type="button" class="btn" id="btnDeleteSong">
 	         					<span class="glyphicon glyphicon-trash"></span> Delete Songs
+	        				</button>
+
+	        				<button type="button" class="btn" id="btnAddAlbum">
+	         					<span class="glyphicon glyphicon-plus"></span> Add Album
 	        				</button>
 						</div>
 						
 					</div>
 					<div class="col-xs-3 editProfile">
 
-						<button type="button" class="btn btn-sm">
+						<button type="button" class="btn btn-sm" id="btnEditUser">
           					<span class="glyphicon glyphicon-pencil"></span> Edit 
         				</button>
 
@@ -154,7 +217,7 @@
 					<div class="col-xs-7 listOfThings">
 					
 					@foreach ($songs as $song)
-						@component('userSongComponent', ['id' => $song->idCancion, 'title' => $song->tituloCancion, 'author' => $song->nombreUsuario, 'album' => $song->tituloAlbum, 'description' => $song->descripcion, 'price' => $song->precio, 'image' => $song->fotoAlbum, 'idUser' => $song->idUsuario, 'genre' => $song->nombreGenero, 'idAlbum' => $song->idAlbum])
+						@component('userSongComponent', ['id' => $song->idCancion, 'title' => $song->tituloCancion, 'author' => $song->nombreUsuario, 'album' => $song->tituloAlbum, 'description' => $song->descripcion, 'price' => $song->precio, 'image' => $song->fotoAlbum, 'idUser' => $song->idUsuario, 'genre' => $song->nombreGenero, 'idGenre' => $song->idGenero, 'idAlbum' => $song->idAlbum, 'albums' => $albums, 'genres' => $genres, 'idUser' => $info->idUsuario])
 						@endcomponent
 					@endforeach
 					</div>
@@ -205,7 +268,81 @@
  			</table>
       		<!-- Allow form submission with keyboard without duplicating the dialog button -->
       		<!--<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
-      		<button type="submit">Upload  Song</button>
+      		<button type="submit">Upload Song</button>
+    	</fieldset>
+  	</form>
+</div>
+<div id="dialog-formAlbum" title="Add Album">
+	<p class="validateTips">All form fields are required.</p>
+  	<form id="addAlbum" action="/addAlbum" method="POST" enctype="multipart/form-data">
+    	<fieldset>
+    		<input type="hidden" name="idUser" id="idUser" value="{{$info->idUsuario}}">
+    		{{ csrf_field() }}
+    		<table>
+    			<tr>
+		      		<td><label for="titleAlbum">Title: </label></td>
+		      		<td><input type="text" name="titleAlbum" id="titleAlbum" class="text ui-widget-content ui-corner-all"></td>
+	      		</tr>
+	      		<tr>
+	      			<td><label for="priceAlbum">Price: </label></td>
+	      			<td><input type="text" name="priceAlbum" id="priceAlbum" class="text ui-widget-content ui-corner-all"></td>
+	      		</tr>
+	      		<tr>
+	      			<td><label for="fileAlbum">File: </label></td>
+	      			<td><label><input type="file" name="fileAlbum" id="fileAlbum" class=""></label></td>
+			    </tr>
+ 			</table>
+      		<!-- Allow form submission with keyboard without duplicating the dialog button -->
+      		<!--<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
+      		<button type="submit">Add Album</button>
+    	</fieldset>
+  	</form>
+</div>
+<div id="dialog-formEdit" title="Edit Information">
+	<p class="validateTips">All form fields are required.</p>
+  	<form id="editUser" action="/editUser" method="POST" enctype="multipart/form-data">
+    	<fieldset>
+    		<input type="hidden" name="idUser" id="idUser" value="{{$info->idUsuario}}">
+    		{{ csrf_field() }}
+    		<table>
+    			<tr>
+		      		<td><label for="nombreUsuario">Username: </label></td>
+		      		<td><input type="text" name="nombreUsuario" id="nombreUsuario" class="text ui-widget-content ui-corner-all" value="{{ $info->nombreUsuario }}" disabled></td>
+	      		</tr>
+	      		<tr>
+	      			<td><label for="correoElectronico">Email address: </label></td>
+	      			<td><input type="text" name="correoElectronico" id="correoElectronico" class="text ui-widget-content ui-corner-all" value="{{ $info->correoElectronico }}" disabled></td>
+	      		</tr>
+	      		<tr>
+	      			<td><label for="nombreCompleto">Full Name: </label></td>
+	      			<td><input type="text" name="nombreCompleto" id="nombreCompleto" class="text ui-widget-content ui-corner-all" value="{{ $info->nombreCompleto }}"></td>
+	      		</tr>
+	      		<tr>
+	      			<td><label for="contraseña">Password: </label></td>
+	      			<td><input type="password" name="contraseña" id="contraseña" class="text ui-widget-content ui-corner-all" value="{{ $info->contraseña }}"></td>
+	      		</tr>
+	      		{{--<tr>
+	      			<td><label for="fileFoto">Profile Picture: </label></td>
+	      			<td><label><input type="file" name="fileFoto" id="fileFoto" class=""></label></td>
+			    </tr>
+			    <tr>
+	      			<td><label for="fileCover">Cover Picture: </label></td>
+	      			<td><label><input type="file" name="fileCover" id="fileCover" class=""></label></td>
+			    </tr>--}}
+			    <tr>
+			    	<td><label for="countryUser">Country: </label></td>
+			    	<td>
+			    		<select name="countryUser" id="countryUser">
+			    			@foreach ($countries as $country)
+			    				<option value="{{ $country->idPais }}">{{ $country->nombrePais }}</option>
+			    			@endforeach
+			    		</select>
+			    	</td>
+			    </tr>
+ 			</table>
+      		<!-- Allow form submission with keyboard without duplicating the dialog button -->
+      		<!--<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
+      		<button type="submit">Edit Information</button>
     	</fieldset>
   	</form>
 </div>
