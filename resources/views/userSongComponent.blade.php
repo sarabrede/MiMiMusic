@@ -50,56 +50,54 @@
 		<div class="col-xs-12 text-center">
 			<p> {{ ($price > 0) ? '$'.$price : 'Free'}} </p>
 		</div>
-		<div class="col-xs-12 text-right">
+		<div class="col-xs-6">
 			<button type="button" class="btn btn-sm btnEditSong" id="btnEditSong{{ $id }}">
           		<span class="glyphicon glyphicon-pencil"></span> 
         	</button>
 		</div>
-		<div class="col-xs-12 text-right">
-			<input type="checkbox" class="deletDis" idSong="{{ $id }}"/>delet this
+		<div class="col-xs-6" >
+		   <input type="checkbox" class="deletDis" idSong="{{ $id }}" value="None"  id="roundedTwo" name="check"/>
 		</div>
 	</div>
 </div>
 
-<div id="dialog-form{{ $id }}" title="Upload a Song">
+<div id="dialog-form{{ $id }}" title="Edit Song">
 	<p class="validateTips">All form fields are required.</p>
   	<form id="editSong" action="/editSong/{{ $id }}" method="POST" enctype="multipart/form-data">
     	<fieldset>
     		<input type="hidden" name="idUser" id="idUser" value="{{ $idUser }}">
     		{{ csrf_field() }}
-    		<table>
-    			<tr>
-		      		<td><label for="titleSong">Title: </label></td>
-		      		<td><input type="text" name="titleSong" id="titleSong" class="text ui-widget-content ui-corner-all" value="{{ $title }}"></td>
-	      		</tr>
-	      		<tr>
-	      			<td><label for="descSong">Description: </label></td>
-	      			<td><input type="text" name="descSong" id="descSong" class="text ui-widget-content ui-corner-all" value="{{ $description }}"></td>
-	      		</tr>
-	      		<tr>
-			    	<td><label for="albumSong">Album: </label></td>
-			    	<td>
-			    		<select name="albumSong" id="albumSong">
-			    			@foreach ($albums as $album)
-			    				<option value="{{ $album->idAlbum }}" {{ ($album->idAlbum == $idAlbum) ? 'selected' : '' }}>{{ $album->tituloAlbum }}</option>
-			    			@endforeach
-			    		</select>
-			    	</td>
-			    </tr>
-			    <tr>
-			    	<td><label for="genreSong">Genre: </label></td>
-			    	<td>
-			    		<select name="genreSong" id="genreSong">
-			    			@foreach ($genres as $genre)
-			    				<option value="{{ $genre->idGenero }}" {{ ($genre->idGenero == $idGenre) ? 'selected' : '' }}>{{ $genre->nombreGenero }}</option>
-			    			@endforeach
-			    		</select>
-			    	</td>
-			    </tr>
- 			</table>
-      		<!-- Allow form submission with keyboard without duplicating the dialog button -->
-      		<!--<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
-      		<button type="submit">Upload  Song</button>
+
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-headphones" data-toggle="tooltip" title="Title"></span>
+		      	<input type="text" name="titleSong" id="titleSong" class="form-control text ui-widget-content ui-corner-all" value="{{ $title }}">
+    		</div>
+    		<br>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-align-justify" data-toggle="tooltip" title="Description"></span>
+		      	<input type="text" name="descSong" id="descSong" class="form-control text ui-widget-content ui-corner-all" value="{{ $description }}">
+    		</div>
+    		<br>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon glyphicon-cd" data-toggle="tooltip" title="Album"></span>
+		      	<select name="albumSong" id="albumSong" class="form-control">
+	    			@foreach ($albums as $album)
+	    				<option value="{{ $album->idAlbum }}" {{ ($album->idAlbum == $idAlbum) ? 'selected' : '' }}>{{ $album->tituloAlbum }}</option>
+	    			@endforeach
+			    </select>
+    		</div>
+    		<br>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-equalizer" data-toggle="tooltip" title="Genre"></span>
+		      	<select name="genreSong" id="genreSong" class="form-control">
+	    			@foreach ($genres as $genre)
+	    				<option value="{{ $genre->idGenero }}" {{ ($genre->idGenero == $idGenre) ? 'selected' : '' }}>{{ $genre->nombreGenero }}</option>
+	    			@endforeach
+			    </select>
+    		</div>
+    		<br>
+      		<button type="submit" class="btn-success" style="height: 30px; border:none; border-radius: 20px;">
+      		<span class="glyphicon glyphicon-pencil"></span>Edit Song</button>
     	</fieldset>
   	</form>
 </div>
