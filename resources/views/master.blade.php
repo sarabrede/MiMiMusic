@@ -87,6 +87,7 @@
 		      		  	@php
 		      		  	$nombreUsuario = session('nombreUsuario', 'default');
 		      		  	$imageUser = session('fotoUser', 'default');
+		      		  	$idUser = session('idUser', '0');
 		      		  	@endphp
 
 		      		  	@if( strcmp($nombreUsuario, "default") == 0)
@@ -95,36 +96,38 @@
 						    	<li class="dropdown">
 						    		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
 						    		<ul class="dropdown-menu">
-							    		<form>
+							    		<form action="/addUser" method="POST">
+							    			{{ csrf_field() }}
 								        	<li class="dropdown-header"> Email </li>
 								        	<li>
-								        		<input type="text" class="form-control" id="emailInput" placeholder="Username / Email" />
+								        		<input type="text" class="form-control" id="emailInput" placeholder="Username / Email" name="emailInput"/>
 								        	</li>
 								        	<li class="dropdown-header"> Username </li>
 								        	<li>
-								        		<input type="text" class="form-control" id="usernameInput" placeholder="Username" />
+								        		<input type="text" class="form-control" id="usernameInput" placeholder="Username" name="usernameInput"/>
 								        	</li>
 								        	<li class="dropdown-header"> Password </li>
 								        	<li>
-								        		<input type="password" class="form-control" id="passwordInput" placeholder="Password" />
+								        		<input type="password" class="form-control" id="passwordInput" placeholder="Password" name ="passwordInput"/>
 								        	</li>
-								        	<li><input class="btn" type="button" value="Make my account"/><li>
+								        	<li><input class="btn" type="submit" value="Make my account"/><li>
 								        </form>
 							        </ul>
 						    	</li>
 						        <li class="dropdown">
 						        	<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> LogIn</a>
 						        	<ul class="dropdown-menu">
-							        	<form>
+							        	<form action="/logIn" method="POST">
+							        		{{ csrf_field() }}
 								        	<li class="dropdown-header"> Email </li>
 								        	<li>
-								        		<input type="text" class="form-control" id="emailInput" placeholder="Username / Email" />
+								        		<input type="text" class="form-control" id="emailInput" placeholder="Username / Email" name="emailInputlog"/>
 								        	</li>
 								        	<li class="dropdown-header"> Password </li>
 								        	<li>
-								        		<input type="password" class="form-control" id="passwordInput" placeholder="Password" />
+								        		<input type="password" class="form-control" id="passwordInput" placeholder="Password" name="passwordInputlog"/>
 								        	</li>
-								        	<li> <input class="btn" type="button" value="Sign In"/> <li>
+								        	<li> <input class="btn" type="submit" value="Sign In"/> <li>
 								        </form>
 							        </ul>
 						        </li>
@@ -136,18 +139,22 @@
 							<ul class="nav navbar-nav navbar-right">
 
 								<li class="col-sm-2">
-									<img src="{{ asset($imageUser) }}" width="100%" height="100%" class="img-circle"/>
+									<img src="{{ $imageUser }}" width="100%" height="100%" class="img-circle"/>
 								</li>
 
 								<li class="col-sm-4 colProfile"> 
-									<a class="profileName">  {{ $nombreUsuario }} </a>
+									<a class="profileName" href="/profile/{{ $idUser }}">  {{ $nombreUsuario }} </a>
 								</li>
 								
 								<li class="dropdown col-sm-1">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"> </a>
   									<ul class="dropdown-menu logoutddmenu">
+  										<li>
+									    	<a style="color: #D1F4E9" href="/shop"> <span class="glyphicon glyphicon-shopping-cart"></span> ShopCart </a>
+										</li>
+										<li class="divider"></li>
 									    <li>
-									    	<a style="color: #D1F4E9"> <span class="glyphicon glyphicon-log-out"></span> Log out </a>
+									    	<a style="color: #D1F4E9" href="/logOut"> <span class="glyphicon glyphicon-log-out"></span> Log out </a>
 										</li>
 								  </ul>
 								</li>
