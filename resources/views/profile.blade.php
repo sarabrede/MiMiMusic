@@ -91,6 +91,7 @@
 	    $( "#btnAddAlbum" ).button().on( "click", function() {
 	    	dialogAlbum.dialog( "open" );
 	    });
+	    $('[data-toggle="tooltip"]').tooltip();
 	});
 </script>
 <div class="container">
@@ -232,43 +233,39 @@
     	<fieldset>
     		<input type="hidden" name="idUser" id="idUser" value="{{$info->idUsuario}}">
     		{{ csrf_field() }}
-    		<table>
-    			<tr>
-		      		<td><label for="titleSong">Title: </label></td>
-		      		<td><input type="text" name="titleSong" id="titleSong" class="text ui-widget-content ui-corner-all"></td>
-	      		</tr>
-	      		<tr>
-	      			<td><label for="descSong">Description: </label></td>
-	      			<td><input type="text" name="descSong" id="descSong" class="text ui-widget-content ui-corner-all"></td>
-	      		</tr>
-	      		<tr>
-	      			<td><label for="fileSong">File: </label></td>
-	      			<td><label><input type="file" name="fileSong" id="fileSong" class=""></label></td>
-			    </tr>
-			    <tr>
-			    	<td><label for="albumSong">Album: </label></td>
-			    	<td>
-			    		<select name="albumSong" id="albumSong">
-			    			@foreach ($albums as $album)
-			    				<option value="{{ $album->idAlbum }}">{{ $album->tituloAlbum }}</option>
-			    			@endforeach
-			    		</select>
-			    	</td>
-			    </tr>
-			    <tr>
-			    	<td><label for="genreSong">Genre: </label></td>
-			    	<td>
-			    		<select name="genreSong" id="genreSong">
-			    			@foreach ($genres as $genre)
-			    				<option value="{{ $genre->idGenero }}">{{ $genre->nombreGenero }}</option>
-			    			@endforeach
-			    		</select>
-			    	</td>
-			    </tr>
- 			</table>
-      		<!-- Allow form submission with keyboard without duplicating the dialog button -->
-      		<!--<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
-      		<button type="submit">Upload Song</button>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-headphones" data-toggle="tooltip" title="Title"></span>
+		      	<input type="text" name="titleSong" id="titleSong" class="form-control text ui-widget-content ui-corner-all">
+    		</div>
+    		<br>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-align-justify" data-toggle="tooltip" title="Description"></span>
+		      	<input type="text" name="descSong" id="descSong" class="form-control text ui-widget-content ui-corner-all">
+    		</div>
+    		<br>
+    		<label for="fileSong">File: </label>
+    		<label><input type="file" name="fileSong" id="fileSong" class=""></label>
+    		<br><br>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon glyphicon-cd" data-toggle="tooltip" title="Album"></span>
+		      	<select name="albumSong" id="albumSong" class="form-control">
+	    			@foreach ($albums as $album)
+	    				<option value="{{ $album->idAlbum }}">{{ $album->tituloAlbum }}</option>
+	    			@endforeach
+			    </select>
+    		</div>
+    		<br>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-equalizer" data-toggle="tooltip" title="Genre"></span>
+		      	<select name="genreSong" id="genreSong" class="form-control">
+	    			@foreach ($genres as $genre)
+	    				<option value="{{ $genre->idGenero }}">{{ $genre->nombreGenero }}</option>
+	    			@endforeach
+			    </select>
+    		</div>
+    		<br>
+      		<button type="submit" class="btn-success" style="height: 30px; border:none; border-radius: 20px;">
+      		<span class="glyphicon glyphicon-upload"></span>Upload Song</button>
     	</fieldset>
   	</form>
 </div>
@@ -278,23 +275,21 @@
     	<fieldset>
     		<input type="hidden" name="idUser" id="idUser" value="{{$info->idUsuario}}">
     		{{ csrf_field() }}
-    		<table>
-    			<tr>
-		      		<td><label for="titleAlbum">Title: </label></td>
-		      		<td><input type="text" name="titleAlbum" id="titleAlbum" class="text ui-widget-content ui-corner-all"></td>
-	      		</tr>
-	      		<tr>
-	      			<td><label for="priceAlbum">Price: </label></td>
-	      			<td><input type="text" name="priceAlbum" id="priceAlbum" class="text ui-widget-content ui-corner-all"></td>
-	      		</tr>
-	      		<tr>
-	      			<td><label for="fileAlbum">File: </label></td>
-	      			<td><label><input type="file" name="fileAlbum" id="fileAlbum" class=""></label></td>
-			    </tr>
- 			</table>
-      		<!-- Allow form submission with keyboard without duplicating the dialog button -->
-      		<!--<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
-      		<button type="submit">Add Album</button>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-headphones" data-toggle="tooltip" title="Title"></span>
+		      	<input type="text" name="titleAlbum" id="titleAlbum" class="form-control text ui-widget-content ui-corner-all">
+    		</div>
+    		<br>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-usd" data-toggle="tooltip" title="Price"></span>
+		      	<input type="text" name="priceAlbum" id="priceAlbum" class="form-control text ui-widget-content ui-corner-all">
+    		</div>
+    		<br>
+    		<label for="fileAlbum">File: </label>
+    		<label><input type="file" name="fileAlbum" id="fileAlbum" class=""></label>
+    		<br><br>
+    		<button type="submit" class="btn-success" style="height: 30px; border:none; border-radius: 20px;">
+      		<span class="glyphicon glyphicon-plus"></span>Add Album</button>
     	</fieldset>
   	</form>
 </div>
@@ -304,45 +299,37 @@
     	<fieldset>
     		<input type="hidden" name="idUser" id="idUser" value="{{$info->idUsuario}}">
     		{{ csrf_field() }}
-    		<table>
-    			<tr>
-		      		<td><label for="nombreUsuario">Username: </label></td>
-		      		<td><input type="text" name="nombreUsuario" id="nombreUsuario" class="text ui-widget-content ui-corner-all" value="{{ $info->nombreUsuario }}" disabled></td>
-	      		</tr>
-	      		<tr>
-	      			<td><label for="correoElectronico">Email address: </label></td>
-	      			<td><input type="text" name="correoElectronico" id="correoElectronico" class="text ui-widget-content ui-corner-all" value="{{ $info->correoElectronico }}" disabled></td>
-	      		</tr>
-	      		<tr>
-	      			<td><label for="nombreCompleto">Full Name: </label></td>
-	      			<td><input type="text" name="nombreCompleto" id="nombreCompleto" class="text ui-widget-content ui-corner-all" value="{{ $info->nombreCompleto }}"></td>
-	      		</tr>
-	      		<tr>
-	      			<td><label for="contraseña">Password: </label></td>
-	      			<td><input type="password" name="contraseña" id="contraseña" class="text ui-widget-content ui-corner-all" value="{{ $info->contraseña }}"></td>
-	      		</tr>
-	      		{{--<tr>
-	      			<td><label for="fileFoto">Profile Picture: </label></td>
-	      			<td><label><input type="file" name="fileFoto" id="fileFoto" class=""></label></td>
-			    </tr>
-			    <tr>
-	      			<td><label for="fileCover">Cover Picture: </label></td>
-	      			<td><label><input type="file" name="fileCover" id="fileCover" class=""></label></td>
-			    </tr>--}}
-			    <tr>
-			    	<td><label for="countryUser">Country: </label></td>
-			    	<td>
-			    		<select name="countryUser" id="countryUser">
-			    			@foreach ($countries as $country)
-			    				<option value="{{ $country->idPais }}">{{ $country->nombrePais }}</option>
-			    			@endforeach
-			    		</select>
-			    	</td>
-			    </tr>
- 			</table>
-      		<!-- Allow form submission with keyboard without duplicating the dialog button -->
-      		<!--<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
-      		<button type="submit">Edit Information</button>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-user" data-toggle="tooltip" title="Username"></span>
+		      	<input type="text" name="nombreUsuario" id="nombreUsuario" class="form-control text ui-widget-content ui-corner-all" value="{{ $info->nombreUsuario }}" disabled>
+    		</div>
+    		<br>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-envelope" data-toggle="tooltip" title="Email address"></span>
+		      	<input type="text" name="correoElectronico" id="correoElectronico" class="form-control text ui-widget-content ui-corner-all" value="{{ $info->correoElectronico }}" disabled>
+    		</div>
+    		<br>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-text-color" data-toggle="tooltip" title="Full Name"></span>
+		      	<input type="text" name="nombreCompleto" id="nombreCompleto" class="form-control text ui-widget-content ui-corner-all" value="{{ $info->nombreCompleto }}">
+    		</div>
+    		<br>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-sunglasses" data-toggle="tooltip" title="Password"></span>
+		      	<input type="password" name="contraseña" id="contraseña" class="form-control text ui-widget-content ui-corner-all" value="{{ $info->contraseña }}">
+    		</div>
+    		<br>
+    		<div class="input-group">
+    			<span class="input-group-addon glyphicon glyphicon-globe" data-toggle="tooltip" title="Country"></span>
+		      	<select name="countryUser" id="countryUser" class="form-control">
+	    			@foreach ($countries as $country)
+	    				<option value="{{ $country->idPais }}">{{ $country->nombrePais }}</option>
+	    			@endforeach
+			    </select>
+    		</div>
+    		<br>
+    		<button type="submit" class="btn-success" style="height: 30px; border:none; border-radius: 20px;">
+      		<span class="glyphicon glyphicon-pencil"></span>Edit Information</button>
     	</fieldset>
   	</form>
 </div>
