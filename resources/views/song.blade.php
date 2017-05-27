@@ -99,7 +99,7 @@ $nombreUsuario = session('nombreUsuario', 'default');
 
 
 					@foreach($comments as $comment)
-						@component('comment', ['user' => $comment->nombreUsuario, 'msg' => $comment->comentario, 'fecha' => $comment->fechaComentario, 'idUser' => $comment->idUsuario])
+						@component('comment', ['user' => $comment->nombreUsuario, 'msg' => $comment->comentario, 'fecha' => $comment->fechaComentario, 'idUser' => $comment->idUsuario, 'foto' => $comment->fotoPerfil])
 						@endcomponent
 					@endforeach
 					</div>
