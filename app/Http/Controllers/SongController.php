@@ -7,6 +7,7 @@ use App\Cancion;
 use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redirect;
 
 class SongController extends Controller
 {
@@ -61,7 +62,16 @@ class SongController extends Controller
 			])->count();
 		}
 
-    	return view ('song', ['song' => $song, 'album' => $album, 'idSong' => $idSong, 'comments' => $comments, 'isfavorite' => $isfavorite]);
+		$buyed = DB::table('Cancion')
+		->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
+		->join('TransaccionAlbum', 'TransaccionAlbum.idAlbum', '=', 'Album.idAlbum')
+		->join('Transaccion', 'Transaccion.idTransaccion', '=', 'TransaccionAlbum.idTransaccion')
+		->where([
+				['Cancion.idCancion', '=', $idSong],
+				['Transaccion.idUsuario', '=', session('idUser') ],
+		])->count();
+
+    	return view ('song', ['song' => $song, 'album' => $album, 'idSong' => $idSong, 'comments' => $comments, 'isfavorite' => $isfavorite, 'buyed' => $buyed]);
     }
 
 	/*public function indexSong($type = 'default', $idUser = 0)
@@ -253,32 +263,48 @@ class SongController extends Controller
 
     public function addSong(Request $request)
     {
-    	$cancion = new Cancion;
-    	$pathBase = 'http://127.0.0.1:8080/audios/';
     	$archivo = $request->file('fileSong');
     	$fileName = str_replace(" ", "_", $archivo->getClientOriginalName());
-    	$file = $request->file('fileSong')->storeAs('usersAudios', $fileName);
-    	$pathTrue = $pathBase.\Carbon\Carbon::now().$fileName;
-    	//$path = Storage::putFileAs('usersAudios', $request->file('fileSong'), $fileName);
+    	$idUser = session('idUser');
+        $realFileName = $idUser.rand().$fileName;
 
+        $request->file('fileSong')->move(public_path("/usersAudios"), $realFileName);
+
+        $trueFile = "../usersAudios/".$realFileName;
+
+		$cancion = new Cancion;
         $cancion->tituloCancion = $request->input('titleSong');
         $cancion->descripcion = $request->input('descSong');
-        $cancion->rutaCancion = $file;
+        $cancion->rutaCancion = $trueFile;
         $cancion->idAlbum = $request->input('albumSong');
         $cancion->idGenero = $request->input('genreSong');
         $cancion->fechaPublicacion = \Carbon\Carbon::now();
+        $cancion->save();
 
-        //$contents = Storage::put('usersAudios', $archivo->path());
+        return redirect('profile/'.$idUser);
+    }
 
-        //$archivo = Input::file('fileSong');
-        //$fileData = file_get_contents($archivo->getRealPath());
+    public function editSong($idSong, Request $request)
+    {
+    	$cancion = Cancion::where('idCancion', '=', $idSong)->first();
+    	$cancion->tituloCancion = $request->input('titleSong');
+        $cancion->descripcion = $request->input('descSong');
+        $cancion->idAlbum = $request->input('albumSong');
+        $cancion->idGenero = $request->input('genreSong');
+        $cancion->fechaPublicacion = \Carbon\Carbon::now();
+        $cancion->save();
+        $idUser = $request->input('idUser');
+        return redirect('profile/'.$idUser);
+    }
 
-        //$move = File::move($file->getRealPath(), $pathTrue);
-        //$fileData = FILE::get($file->path());
-        //move_uploaded_file($fileData, $pathTrue);
-        //Storage::copy(FILE::get($file), $pathTrue);
-        //$cancion->save();
-        return view('kek', ['cancion' => $cancion, 'jej' => $archivo]);//.$request->input('idUser')
+    public function deleteSongs($idSongs, $idUser)
+    {
+    	$songs = explode(',', $idSongs);
+    	foreach ($songs as $song) {
+    		$cancion = Cancion::where('idCancion', '=', $song)->first();
+    		$cancion->delete();
+    	}
+    	return redirect('profile/'.$idUser);
     }
 
     public function addFavorite($idSong)
@@ -300,12 +326,48 @@ class SongController extends Controller
 
     }
 
-    public function addToCart($idSong, Request $request)
+    public function addToCart($idSong)
     {
-    	$collection = collect
-
-    	$request->session()->push('Cart', $idSong);
+    	$songs = session('cart', '0');
+    	if ($songs == '0')
+    	{
+    		session(['cart' => $idSong]);
+    	}
+    	else
+    	{
+    		$cartString = $songs.','.$idSong;
+    		session(['cart' => $cartString]);
+    	}
+    	
     }
+
+    /*public function redirect_post($url, array $data)
+	{
+	    ?>
+	    <html xmlns="http://www.w3.org/1999/xhtml">
+	    <head>
+	        <script type="text/javascript">
+	            function closethisasap() {
+	                document.forms["redirectpost"].submit();
+	            }
+	        </script>
+	    </head>
+	    <body onload="closethisasap();">
+	    <form name="redirectpost" method="post" action=<?php echo $url?> enctype="multipart/form-data">
+	        <?php
+	        if ( !is_null($data) ) {
+	            foreach ($data as $k => $v) {
+	                echo '<input type="hidden" name="' . $k . '" value="' . $v . '"> ';
+	            }
+	            echo '<input type="hidden" name="_token" value="'.csrf_token().'">';
+	        }
+	        ?>
+	    </form>
+	    </body>
+	    </html>
+	    <?php
+	    exit;
+	}*/
 
     /*public function __invoke($id)
     {
