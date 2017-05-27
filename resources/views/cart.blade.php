@@ -22,12 +22,13 @@
 					@endforeach
 
 					@else
-						<p> You haven't bought anything you... baka!  </p>
+						<p> You haven't bought anything</p>
 					@endif
 				</div>
 
 				<div class="col-xs-4">
-					<form>
+					<form action="/shop/buy" method="POST">
+						{{ csrf_field() }}
 			        	<label for="noCardInput" class="pull-left">Card Number:</label>
 						<input type="text" class="form-control" id="noCardInput" placeholder="Card Number" />
 
@@ -56,7 +57,7 @@
 						<input type="text" class="form-control" id="securityCardInput" placeholder="Security Code" />
 
 						<label class="pull-left">{{'US$'.$total}}</label>
-
+						<input type="hidden" name="total" id="total" value="{{$total}}">
 						<input type="submit" class="btn btn-lg btnLogin" value="Buy!"/>
 			        </form>
 				</div>
