@@ -21,16 +21,16 @@ Route::get('/index/subscribers/{idUser}/{number}', 'SongController@indexSongBySu
 /*Route::get('/index/{type?}/{idUser?}', 'SongController@indexSong');*/
 
 
-
-/*Route::get('/search/{type?}/{searchParam?}', 'SongController@searchSong');*/
-
 Route::get('/search', 'SongController@searchSongByTitle');
 Route::get('/search/songs/{titulo}', 'SongController@searchSongByTitleAjax');
 Route::get('/search/albums/{titulo}', 'SongController@searchSongByAlbum');
 Route::get('/search/users/{usuario}', 'SongController@searchSongByUser');
+/*Route::get('/search/{type?}/{searchParam?}', 'SongController@searchSong');*/
 
 
 Route::get('/shop', 'AlbumController@shopAlbum');
+Route::get('/shop/delete/{idAlbum}', 'AlbumController@deleteAlbum');
+Route::post('/shop/buy', 'AlbumController@buyAlbums');
 
 Route::get('/profile/{userProfile}', 'UserController@profileUser');
 
@@ -40,11 +40,20 @@ Route::get('/song/{idSong}/deletefavorite', 'SongController@deleteFavorite');
 Route::get('/song/comment/{idSong}/{comentario}', 'CommentController@addComment');
 Route::get('/song/{idSong}/addToCart', 'SongController@addToCart');
 
-
 Route::get('/album/{idAlbum}', 'AlbumController@getSong');
 
 Route::post('/addUser', 'UserController@addUser');
+Route::post('/editUser', 'UserController@editUser');
+Route::post('/editProfilePicture', 'UserController@editProfilePicture');
+Route::post('/editCoverPicture', 'UserController@editCoverPicture');
 
 Route::post('/logIn', 'UserController@logIn');
+Route::get('/logOut', 'UserController@logOut');
 
 Route::post('/addSong', 'SongController@addSong');
+
+Route::post('/editSong/{idSong}', 'SongController@editSong');
+
+Route::get('/deleteSongs/{idSongs}/{idUser}', 'SongController@deleteSongs');
+
+Route::post('/addAlbum', 'AlbumController@addAlbum');
