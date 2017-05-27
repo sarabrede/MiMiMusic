@@ -13,4 +13,9 @@
 	<div class="col-xs-1 infoShop text-right">
 		<p> {{ ($price > 0) ? 'US$'.$price : 'Free'}} </p>
 	</div>
+	<div class="col-xs-1">
+		<button type="button" class="btn btnDelete"> X </button>
+		<input type="hidden" value="{{ $id }}" />
+	</div>
+
 </div>
