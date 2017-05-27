@@ -42,6 +42,14 @@ html, body, .containerPanel, .loginPanel, .imagePanel, .container, .panel-body,
 	background-color: rgb(209, 244, 233);
 }
 
+
+.form-control.error
+{
+	border-width: 2px;
+	border-color: red;
+}
+
+
 /*Login Panel*/
 .rowLoginPanel
 {
@@ -685,11 +693,6 @@ body
 .infoShop > p:first-child
 {
 	margin-top: 20px;
-}
-
-.CartItem > div:nth-child(3)
-{
-	margin-left: 7%;
 }
 
 /*Profile */
