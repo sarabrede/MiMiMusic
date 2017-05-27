@@ -16,12 +16,13 @@ $nombreUsuario = session('nombreUsuario', 'default');
 
 <input type="hidden" id="idSongPage" value="{{ $song->idCancion }}" />
 <input type="hidden" id="priceSongPage" value="{{ $song->precio }}" />
+<input type="hidden" id="idAlbumPage" value="{{ $song->idAlbum }}" />
+<input type="hidden" id="buyed" value="{{ $buyed }}" />
 
 <div class="container">
 	<div class="panel panel-default musicPanel contenido">
 		<div class="panel-body">
 			<div class="row songRow">
-
 				<div class="col-xs-12">
 					<div class="col-xs-8 photoSong">
 						<div class="gradientParent col-xs-12">
@@ -31,7 +32,7 @@ $nombreUsuario = session('nombreUsuario', 'default');
 
 							@if( strcmp($nombreUsuario, "default") != 0)
 
-								@if($song->precio != 0.00)
+								@if($song->precio != 0.00 && $buyed == 0) 
 									<button type="button" class="btn btnSong btnBuy">
 		          						<span class="glyphicon glyphicon-shopping-cart"></span>
 		        					</button>
