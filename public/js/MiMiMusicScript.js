@@ -259,6 +259,18 @@ var tipoPill = "popular";
 			$(".inputPhotoProfile").removeClass("hoverOverPhoto");
 		});
 
+
+        $(".filecamera").change(function() {
+            var tipo = $(this).next().next().val();
+
+            if(tipo == "profile")
+                $("#ProfilePhotoForm").submit();
+            
+            else
+                $("#BannerPhotoForm").submit();
+        });
+
+
 	/*Song*/
 
     $(".btnLove").click(function() {
@@ -294,7 +306,7 @@ var tipoPill = "popular";
         
         if(!$(this).hasClass("btnUsed"))
         {
-            var id = $("#idSongPage").val();
+            var id = $("#idAlbumPage").val();
             $.ajax({
             type: "GET",
             url: "/song/" + id +"/addToCart",
@@ -346,20 +358,29 @@ var tipoPill = "popular";
     });
 
     var audio = document.getElementById("audioSongPlayer");
-    audio.addEventListener("timeupdate", function() {
+    if(audio != null)
+    {
+        var buyed = $("#buyed").val();
 
-        var price = $("#priceSongPage").val();
-
-        if(price != 0)
+        if(buyed == 0)
         {
-            if(audio.currentTime >= 30)
-            {
-                audio.currentTime = 0;
-            }
+            audio.addEventListener("timeupdate", function() {
+
+                var price = $("#priceSongPage").val();
+
+                if(price != 0)
+                {
+                    if(audio.currentTime >= 30)
+                    {
+                        audio.currentTime = 0;
+                    }
+                }
+       
+            });
         }
 
-    });
-
+    }
+    
 
     /*Búsqueda*/
 
@@ -468,6 +489,25 @@ var tipoPill = "popular";
 
     });
 
+
+    /*Shop*/
+
+    $(".btnDelete").click(function(){
+        var idAlbum = $(this).next().val();
+
+        $.ajax({
+            type: "GET",
+            url: "/shop/delete/" + idAlbum,
+            contentType: "application/json",
+            dataType: "json",
+            data:'_token = <?php echo csrf_token() ?>'
+            });
+
+        $(this).parent().parent().remove();
+
+    });
+
+
 	
 });
 
@@ -498,10 +538,10 @@ function appendSearchComponent(image, title, album, genre, author, description, 
     "<div class='col-xs-4 imageFrame'>" + 
     "<img src='" + image +"' width='100%' height='100%' class='img-rounded'/> </div>" +
     "<div class='col-xs-5 infoResult'>" +
-    "<a href='/song/" + idSong +"' target='_blank'>" + title + "</a> <br>" +
-    "<a href='/album/" + idAlbum + "'target='_blank'>" + album + "</a> <br>" +
+    "<a href='/song/" + idSong +"'>" + title + "</a> <br>" +
+    "<a href='/album/" + idAlbum + "'>" + album + "</a> <br>" +
     "<label>" + genre + "</label><br>" +
-    "<a href='/profile/" + idUsuario + "'target='_blank'>" + author + "</a> <p>" + description + "</p> </div>" +
+    "<a href='/profile/" + idUsuario + "'>" + author + "</a> <p>" + description + "</p> </div>" +
     "<div class='col-xs-2 infoResult pull-right text-center'>"+
     "<p>";
 
