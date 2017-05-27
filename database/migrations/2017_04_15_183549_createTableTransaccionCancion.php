@@ -13,16 +13,13 @@ class CreateTableTransaccionCancion extends Migration
      */
     public function up()
     {
-        Schema::create('TransaccionCancion', function (Blueprint $table) {
-            $table->integer('idCancion')->unsigned();
+        Schema::create('TransaccionAlbum', function (Blueprint $table) {
+            $table->increments('idAlbumTransaccion');
+            $table->integer('idAlbum')->unsigned();
             $table->integer('idTransaccion')->unsigned();
-            $table->float('subtotalCancion');
-            $table->float('totalCancion');
 
-            $table->foreign('idCancion')->references('idCancion')->on('Cancion');
+            $table->foreign('idAlbum')->references('idAlbum')->on('Album');
             $table->foreign('idTransaccion')->references('idTransaccion')->on('Transaccion');
-
-            $table->primary(['idCancion', 'idTransaccion']);
 
         });
     }
@@ -34,6 +31,6 @@ class CreateTableTransaccionCancion extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('TransaccionCancion');
+        Schema::dropIfExists('TransaccionAlbum');
     }
 }
