@@ -217,10 +217,12 @@
 
 					<div class="col-xs-7 listOfThings">
 					
+					@if($songs != null)
 					@foreach ($songs as $song)
 						@component('userSongComponent', ['id' => $song->idCancion, 'title' => $song->tituloCancion, 'author' => $song->nombreUsuario, 'album' => $song->tituloAlbum, 'description' => $song->descripcion, 'price' => $song->precio, 'image' => $song->fotoAlbum, 'idUser' => $song->idUsuario, 'genre' => $song->nombreGenero, 'idGenre' => $song->idGenero, 'idAlbum' => $song->idAlbum, 'albums' => $albums, 'genres' => $genres, 'idUser' => $info->idUsuario])
 						@endcomponent
 					@endforeach
+					@endif
 					</div>
 				</div>
 			</div>
