@@ -17,12 +17,11 @@ class CreateTableUsuario extends Migration
             $table->increments('idUsuario');
             $table->string('nombreUsuario', 50)->unique();
             $table->string('correoElectronico', 50)->unique();
-            $table->string('nombreCompleto', 200)->nullable();
+            $table->string('nombreCompleto', 200)->default('');
             $table->string('contraseña', 32);
             $table->string('fotoPerfil')->default('../images/defaultUser.png');
             $table->string('fotoBanner')->default('../images/defaultBanner.jpg');
-            $table->enum('tipo', ['Solista', 'Banda'])->nullable();
-            $table->integer('idPais')->unsigned()->nullable();
+            $table->integer('idPais')->unsigned()->default('1');
             $table->boolean('activo')->default(1);
             $table->timestamp('fechaCreacion');
 
