@@ -25,13 +25,21 @@
 							<div class="col-xs-12">
 								<div class="form-group form-group-lg row">
 									<label for="emailInputlog" class="pull-left">Email address:</label>
+									@if(strcmp($error, "no") == 0)
 									<input type="text" class="form-control" id="emailInputlog" placeholder="Username / Email" name="emailInputlog" />
+									@else
+									<input type="text" class="form-control error" id="emailInputlog" placeholder="Username / Email" name="emailInputlog" />
+									@endif
 								</div>
 							</div>
 							<div class="col-xs-12">
 								<div class="form-group form-group-lg row">
 									<label for="passwordInputlog" class="pull-left">Password:</label>
+									@if(strcmp($error, "no") == 0)
 									<input type="password" class="form-control" id="passwordInputlog" placeholder="Password" name="passwordInputlog"/>
+									@else
+									<input type="password" class="form-control error" id="passwordInputlog" placeholder="Password" name="passwordInputlog"/>
+									@endif
 								</div>
 							</div>
 							<div class="col-xs-12">
@@ -41,7 +49,7 @@
 						</div>
 					</form>
 
-					<form class="formSignUp" action="/addUser" method="POST">
+					<form class="formSignUp" action="/addUser" method="POST" id="formSignUpLanding">
 						{{ csrf_field() }}
 						<div class="col-xs-12 rowLogin">
 							<div class="col-xs-12">
@@ -50,13 +58,13 @@
 							<div class="col-xs-12">
 								<div class="form-group form-group-lg row">
 									<label for="emailInput" class="pull-left">Email:</label>
-									<input type="email" class="form-control" id="emailInput" placeholder="Email" name="emailInput"/>
+									<input type="email" class="form-control emailCheck" id="emailInput" placeholder="Email" name="emailInput"/>
 								</div>
 							</div>
 							<div class="col-xs-12">
 								<div class="form-group form-group-lg row">
 									<label for="usernameInput" class="pull-left">Username:</label>
-									<input type="text" class="form-control" id="usernameInput" placeholder="Username" name="usernameInput"/>
+									<input type="text" class="form-control usernameCheck" id="usernameInput" placeholder="Username" name="usernameInput"/>
 								</div>
 							</div>
 							<div class="col-xs-12">
@@ -66,7 +74,7 @@
 								</div>
 							</div>
 							<div class="col-xs-12">
-								<input type="submit" class="btn btnLogin btnSignUp" value="Sign Up"/>
+								<input type="button" class="btn btnLogin btnSignUp" value="Sign Up" id="btnSignUpLanding" />
 								<br>
 								<p id="account"> <u> I already have an account! </u> </p>
 							</div>
