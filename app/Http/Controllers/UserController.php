@@ -51,6 +51,10 @@ class UserController extends Controller
         $usuario->contraseña = $request->input('passwordInput');
 
         $usuario->save();
+
+        $request->session()->flush();
+        session(['idUser' => $usuario->idUsuario, 'nombreUsuario' => $usuario->nombreUsuario, 'fotoUser' => '../images/defaultUser.png']);
+
         return redirect('index');
     }
 
@@ -66,8 +70,24 @@ class UserController extends Controller
             ->where('Usuario.contraseña', '=', $request->input('passwordInputlog'));
         })
         ->first();
-        session(['idUser' => $usuario->idUsuario, 'nombreUsuario' => $usuario->nombreUsuario, 'fotoUser' => $usuario->fotoPerfil]);
-        return redirect('index');
+
+        if($usuario != null)
+        {
+            session(['idUser' => $usuario->idUsuario, 'nombreUsuario' => $usuario->nombreUsuario, 'fotoUser' => $usuario->fotoPerfil]);
+            return redirect('index');
+        }
+
+        else
+        {
+            $songs = DB::table('Cancion')
+            ->join('Album', 'Cancion.idAlbum', '=', 'Album.idAlbum')
+            ->join('Usuario', 'Usuario.idUsuario', '=', 'Album.idUsuario')
+            ->select('Cancion.*', 'Album.tituloAlbum', 'Album.fotoAlbum', 'Usuario.nombreUsuario')
+            ->orderby('idCancion', 'desc')
+            ->limit(6)
+            ->get();
+            return view('landingPage', ['songs' => $songs, 'error' => 'si']);
+        }
     }
 
     public function logOut(Request $request)
@@ -124,6 +144,26 @@ class UserController extends Controller
         $usuario->save();
         
         return redirect('/profile/'.$idUser);
+    }
+
+    public function checkmail($email)
+    {
+        $existemail = DB::table('Usuario')
+        ->select('Usuario.*')
+        ->where('correoElectronico', '=', $email)
+        ->count();
+
+        return response()->json($existemail);
+    }
+
+    public function checkusername($username)
+    {
+        $existusuario = DB::table('Usuario')
+        ->select('Usuario.*')
+        ->where('nombreUsuario', '=', $username)
+        ->count();
+
+        return response()->json($existusuario);
     }
 
 }
